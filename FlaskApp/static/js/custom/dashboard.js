@@ -9,7 +9,7 @@ $("#search_button").click(function(){
 	var data = {'search': output}
 
 	$.ajax({
-            url: '/x',
+            url: '/lookup',
             data: JSON.stringify(data),
             type: 'POST',
             success: function(response) {

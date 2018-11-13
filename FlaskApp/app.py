@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from flaskext.mysql import MySQL
 from flask import request
 from flask import jsonify
+import phenotype_transfer as pt
 
 app = Flask(__name__)
 
@@ -24,11 +25,12 @@ print(result)
 def main():
     return render_template('dashboard.html')
 
-@app.route('/x', methods=["POST"])
+@app.route('/lookup', methods=["POST"])
 def showSignUp():
-	print(request.json['search'])
-	response = [{"hello":"rehan"}]
-	return jsonify(response)
+	req = request.json['search']
+	print("request: %s" % req)
+	resp = pt.find_phenotype(req)
+	return jsonify(resp)
 
 app.run(debug=True)
 
