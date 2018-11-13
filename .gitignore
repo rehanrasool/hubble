@@ -1,8 +1,4 @@
 .DS_Store
-/temp
-test.py
-rockyou-withcount.txt
-*.pkl
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
