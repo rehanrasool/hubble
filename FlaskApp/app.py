@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect
 from flaskext.mysql import MySQL
 from flask import request
 from flask import jsonify
-from flask_sqlalchemy import SQLAlchemy
+# from flask_sqlalchemy import SQLAlchemy
 import phenotype_transfer as pt
 
 app = Flask(__name__)
