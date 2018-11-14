@@ -1,4 +1,7 @@
 console.log('loading')
+
+var phenotypes;
+
 $("#search_button").click(function(){
 	console.log('loaded hubble')
 	var output = $("#search_query").val();
@@ -9,23 +12,48 @@ $("#search_button").click(function(){
 	var data = {'search': output}
 
 	$.ajax({
-            url: '/lookup',
-            data: JSON.stringify(data),
-            type: 'POST',
-            success: function(response) {
-            	console.log('got response')
-                console.log(response);
-            },
-            error: function(error) {
-            	console.log('got error')
-                console.log(error);
-            },
-            dataType: "json",
+			url: '/lookup',
+			data: JSON.stringify(data),
+			type: 'POST',
+			success: function(response) {
+				console.log('got response')
+				phenotypes = response;
+				console.log(phenotypes);
+
+				html = ""
+				for (var i=0; i<phenotypes.length; i++) {
+					var obj = jQuery.parseJSON(phenotypes[i]);
+					var keys = Object.keys(obj);
+					html += '<a id="phenotypes" class="list-group-item list-group-item-action waves-effect">';
+					html += '<i class="fa fa-pie-chart mr-3"></i>' + keys[0];
+					html += '</a>';
+				}
+
+				$('#left-panel').html(html);
+				$('#left-panel').show();
+			},
+			error: function(error) {
+				console.log('got error')
+				console.log(error);
+			},
+			dataType: "json",
 			contentType: 'application/json;charset=UTF-8',
-    });
+	});
 
 })
 
+$(document).on('click', '#phenotypes', onClick);
+function onClick() {
+	var current = $(this).text();
+	console.log(current);
+	for (var i=0; i<phenotypes.length; i++) {
+		var obj = jQuery.parseJSON(phenotypes[i]);
+		var keys = Object.keys(obj);
+		if (keys == current) {
+			console.log(phenotypes[i]);
+		}
+	}
+}
 
 // // Line
 // var ctx = document.getElementById("myChart").getContext('2d');
