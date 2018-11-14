@@ -26,6 +26,12 @@ $("#search_button").click(function(){
 
 })
 
+// popovers Initialization
+$(function() {
+    $('[data-toggle="popover"]').popover()
+})
+
+
 
 // // Line
 // var ctx = document.getElementById("myChart").getContext('2d');
