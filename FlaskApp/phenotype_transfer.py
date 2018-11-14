@@ -33,8 +33,8 @@ def find_phenotype(phenotype):
     for file in files:
         read_file = pd.read_csv(path + file)
         result = phenotype_transfer(read_file)
-        print(result)
-        output.append(result) # TODO use phenotype
+        if (phenotype in result):
+            output.append(result)
     return output
 
 # find_phenotype("asthma")

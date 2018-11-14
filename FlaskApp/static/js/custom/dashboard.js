@@ -1,4 +1,7 @@
 console.log('loading')
+
+var phenotypes;
+
 $("#search_button").click(function(){
 	console.log('loaded hubble')
 	var output = $("#search_query").val();
@@ -9,20 +12,33 @@ $("#search_button").click(function(){
 	var data = {'search': output}
 
 	$.ajax({
-            url: '/lookup',
-            data: JSON.stringify(data),
-            type: 'POST',
-            success: function(response) {
-            	console.log('got response')
-                console.log(response);
-            },
-            error: function(error) {
-            	console.log('got error')
-                console.log(error);
-            },
-            dataType: "json",
+			url: '/lookup',
+			data: JSON.stringify(data),
+			type: 'POST',
+			success: function(response) {
+				console.log('got response')
+				phenotypes = response;
+				console.log(phenotypes);
+
+				html = ""
+				for (var i=0; i<phenotypes.length; i++) {
+					var obj = jQuery.parseJSON(phenotypes[i]);
+					var keys = Object.keys(obj);
+					html += '<a id="phenotypes" class="list-group-item list-group-item-action waves-effect">';
+					html += '<i class="fa fa-pie-chart mr-3"></i>' + keys[0];
+					html += '</a>';
+				}
+
+				$('#left-panel').html(html);
+				$('#left-panel').show();
+			},
+			error: function(error) {
+				console.log('got error')
+				console.log(error);
+			},
+			dataType: "json",
 			contentType: 'application/json;charset=UTF-8',
-    });
+	});
 
 })
 
@@ -31,7 +47,67 @@ $(function() {
     $('[data-toggle="popover"]').popover()
 })
 
+$(document).on('click', '#phenotypes', onClick);
+function onClick() {
+	$('#left-panel a').removeClass('active');
+	$('#left-panel a').css('color', 'black');
+	var current = $(this).text();
+	$(this).addClass('active');
+	$(this).css('color', 'white');
+	console.log(current);
+	var current_pheno;
+	var obj;
+	var keys;
+	for (var i=0; i<phenotypes.length; i++) {
+		obj = jQuery.parseJSON(phenotypes[i]);
+		keys = Object.keys(obj);
+		if (keys[0] == current) {
+			console.log(phenotypes[i]);
+			current_pheno = phenotypes[i];
+			break;
+		}
+	}
 
+	var phenotype_name = keys[0];
+	fields = Object.keys(obj[phenotype_name]);
+	console.log(fields)
+
+	html = ""
+	html += '<p><strong>Phenotype:</strong> ' + phenotype_name + '</p>';
+	for (var i=0; i<fields.length; i++) {
+		html += '<p><strong>'+fields[i]+':</strong> ' + obj[phenotype_name][fields[i]] + '</p>';
+	}
+	$('#main_panel .card-body').html(html);
+	$('#main_panel').show();
+}
+
+// {"Diagnosing Asthma in Young Children":
+// {"ICD-9 Inclusionary\u00a0": ["439.xx"],
+// "ICD-9 exclusionary\u00a0": ["277.00-277.02", "279.xx", 331.0, "317 318 319", "428-429.9", 496.0, 70.0, 511.1],
+// "age": ["<5"],
+// "allergy signs": ["The child has signs of allergies, including the allergic skin condition eczema"],
+// "allergy reactions": ["The child has allergic reactions to pollens or other airborne allergens"],
+// "wheezes": ["The child wheezes even when he or she doesn't have a cold or other infection"],
+// "Reference link": ["https://www.nhlbi.nih.gov/health-topics/asthma"]}}
+
+// keys.forEach(function(key) {
+//     head += '<th>'+key+'</th>';
+//   });
+//   $(selector).append(head+'</tr></thead>');
+//   // Add body
+//   var body = '<tbody>';
+//   data.forEach(function(obj) { // For each row
+//     var row = '<tr>';
+//     keys.forEach(function(key) { // For each column
+//       row += '<td>';
+//       if (obj.hasOwnProperty(key)) { // If the obj doesnt has a certain key, add a blank space.
+//         row += obj[key];
+//       }
+//       row += '</td>';
+//     });
+//     body += row+'<tr>';
+//   })
+//   $(selector).append(body+'</tbody>');
 
 // // Line
 // var ctx = document.getElementById("myChart").getContext('2d');

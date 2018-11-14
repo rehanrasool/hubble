@@ -1,0 +1,7 @@
+﻿Phenotype,Sickle cell disease: wheeze or asthma?,,,,,,,,,,,
+ICD-9 Inclusionary ,439.32,,,,,,,,,,,
+ICD-9 exclusionary ,277.00-277.02,279.xx,331,317 318 319,428-429.9,496,710,511.1,714,415.11-415.19,416.0-416.8,417.xx
+age,10-May,,,,,,,,,,,
+Defination1,"Physician diagnosis of asthma and use of asthma medication ever, via parent report and confirmed with chart review [3]",,,,,,,,,,,
+Defination2,Parent report using modified ISAAC questionnaire (“touch of asthma”) for “lifetime asthma;” and wheeze or cough in past 12 months lasting 7 days in absence of URI for “current asthma”,,,,,,,,,,,
+Reference link,https://www.nhlbi.nih.gov/health-topics/asthma,,,,,,,,,,,
