@@ -23,10 +23,10 @@ $("#search_button").click(function(){
 				// create left-panel
 				html = ""
 				for (var i=0; i<phenotypes.length; i++) {
-					var obj = jQuery.parseJSON(phenotypes[i]);
-					var keys = Object.keys(obj);
+					var data = phenotypes[i];
+					// console.log(data)
 					html += '<a id="phenotypes" class="list-group-item list-group-item-action waves-effect">';
-					html += '<i class="fa fa-pie-chart mr-3"></i>' + keys[0];
+					html += '<i class="fa fa-pie-chart mr-3"></i>' + data['title'];
 					html += '</a>';
 				}
 
@@ -49,11 +49,11 @@ $("#search_button").click(function(){
 
 // popovers Initialization
 $(function() {
-    $('[data-toggle="popover"]').popover()
+	$('[data-toggle="popover"]').popover()
 })
 
-$(document).on('click', '#phenotypes', onClick);
-function onClick() {
+$(document).on('click', '#phenotypes', phenotype_click);
+function phenotype_click() {
 	$('#left-panel a').removeClass('active');
 	$('#left-panel a').css('color', 'black');
 	$(this).addClass('active');
@@ -62,27 +62,27 @@ function onClick() {
 	var current = $(this).text();
 	console.log(current);
 	var current_pheno;
-	var obj;
+	var data;
 	var keys;
 	for (var i=0; i<phenotypes.length; i++) {
-		obj = jQuery.parseJSON(phenotypes[i]);
-		keys = Object.keys(obj);
-		if (keys[0] == current) {
-			console.log(phenotypes[i]);
+		data = phenotypes[i];
+		keys = Object.keys(data);
+		if (data['title'] == current) {
 			current_pheno = phenotypes[i];
 			break;
 		}
 	}
 
-	var phenotype_name = keys[0];
-	fields = Object.keys(obj[phenotype_name]);
-	console.log(fields)
+	console.log(current_pheno);
+	var phenotype_name = current_pheno['title'];
 
 	html = ""
 	html += '<p><strong>Phenotype:</strong> ' + phenotype_name + '</p>';
-	for (var i=0; i<fields.length; i++) {
-		html += '<p><strong>'+fields[i]+':</strong> ' + obj[phenotype_name][fields[i]] + '</p>';
+	for (i in current_pheno){
+		if (i != 'title')
+			html += '<p><strong>'+i+':</strong> ' + current_pheno[i] + '</p>';
 	}
+
 	$('#main_panel .card-body').html(html);
 	// $('#main_panel').show();
 }
@@ -95,13 +95,11 @@ function create_histogram() {
 
 	// Gather phenotype result count
 	phenotype_result = {}
-	var obj, keys, phenotype_name;
+	var data, keys, phenotype_name;
 	for (var i=0; i<phenotypes.length; i++) {
-		obj = jQuery.parseJSON(phenotypes[i]);
-		keys = Object.keys(obj);
-		phenotype_name = keys[0];
-		fields = Object.keys(obj[phenotype_name]);
-		phenotype_result[phenotype_name] = parseInt(obj[phenotype_name]['Result'][0]);
+		data = phenotypes[i];
+		phenotype_name = data['title'];
+		phenotype_result[phenotype_name] = (i+1)*1000;
 		// console.log(fields);
 	}
 	// console.log(phenotype_result);
@@ -111,40 +109,40 @@ function create_histogram() {
 	// Construct histogram
 	var ctx = document.getElementById("comparison_histogram").getContext('2d');
 	var comparison_histogram = new Chart(ctx, {
-	    type: 'bar',
-	    data: {
-	        labels: Object.keys(phenotype_result),
-	        datasets: [{
-	            label: '# of Patients',
-	            data: Object.values(phenotype_result),
-	            backgroundColor: [
-	                'rgba(255, 99, 132, 0.2)',
-	                'rgba(54, 162, 235, 0.2)',
-	                'rgba(255, 206, 86, 0.2)',
-	                'rgba(75, 192, 192, 0.2)',
-	                'rgba(153, 102, 255, 0.2)',
-	                'rgba(255, 159, 64, 0.2)'
-	            ],
-	            borderColor: [
-	                'rgba(255,99,132,1)',
-	                'rgba(54, 162, 235, 1)',
-	                'rgba(255, 206, 86, 1)',
-	                'rgba(75, 192, 192, 1)',
-	                'rgba(153, 102, 255, 1)',
-	                'rgba(255, 159, 64, 1)'
-	            ],
-	            borderWidth: 1
-	        }]
-	    },
-	    options: {
-	        scales: {
-	            yAxes: [{
-	                ticks: {
-	                    beginAtZero: true
-	                }
-	            }]
-	        }
-	    }
+		type: 'bar',
+		data: {
+			labels: Object.keys(phenotype_result),
+			datasets: [{
+				label: '# of Patients',
+				data: Object.values(phenotype_result),
+				backgroundColor: [
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(54, 162, 235, 0.2)',
+					'rgba(255, 206, 86, 0.2)',
+					'rgba(75, 192, 192, 0.2)',
+					'rgba(153, 102, 255, 0.2)',
+					'rgba(255, 159, 64, 0.2)'
+				],
+				borderColor: [
+					'rgba(255,99,132,1)',
+					'rgba(54, 162, 235, 1)',
+					'rgba(255, 206, 86, 1)',
+					'rgba(75, 192, 192, 1)',
+					'rgba(153, 102, 255, 1)',
+					'rgba(255, 159, 64, 1)'
+				],
+				borderWidth: 1
+			}]
+		},
+		options: {
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero: true
+					}
+				}]
+			}
+		}
 	});
 }
 
