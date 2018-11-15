@@ -1,26 +1,45 @@
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, request, jsonify
 from flaskext.mysql import MySQL
-from flask import request
-from flask import jsonify
-# from flask_sqlalchemy import SQLAlchemy
+from flask_heroku import Heroku
+from flask_sqlalchemy import SQLAlchemy
+import os
+
 import phenotype_transfer as pt
 
 app = Flask(__name__)
+heroku = Heroku(app)
 
-# mysql = MySQL()
- 
-# MySQL configurations
-# app.config['MYSQL_DATABASE_USER'] = 'hubble'
-# app.config['MYSQL_DATABASE_PASSWORD'] = 'Hubbl3p@ss'
-# app.config['MYSQL_DATABASE_DB'] = 'hubble'
-# app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-# mysql.init_app(app)
-# conn = mysql.connect()
-# cursor = conn.cursor()
-# print(cursor)
-# cursor.execute("SELECT * FROM patients")
-# result = cursor.fetchall()
-# print(result)
+app.config.update({
+    'SQLALCHEMY_DATABASE_URI': os.environ['DATABASE_URL'],
+    'SQLALCHEMY_TRACK_MODIFICATIONS': False
+})
+db = SQLAlchemy(app)
+
+class VitalSigns(db.Model):
+    __tablename__ = 'vital_signs'
+
+    id = db.Column(db.Integer, primary_key=True)
+    body_temp = db.Column(db.String())
+    blood_pressure = db.Column(db.String())
+    heart_rate = db.Column(db.String())
+    breathing_rate = db.Column(db.String())
+
+    def __init__(self, body_temp, blood_pressure, heart_rate, breathing_rate):
+        self.body_temp = body_temp
+        self.blood_pressure = blood_pressure
+        self.heart_rate = heart_rate
+        self.breathing_rate = breathing_rate
+
+    def __repr__(self):
+        return '<id {}>'.format(self.id)
+    
+    def serialize(self):
+        return {
+            'id': self.id, 
+            'blood_pressure': self.blood_pressure,
+            'heart_rate': self.heart_rate,
+            'breathing_rate':self.breathing_rate
+        }
 
 @app.route("/")
 def main():
