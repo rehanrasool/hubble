@@ -156,6 +156,15 @@ def add_phenotype():
 	email = request.form['email']
 	reference = request.form['reference']
 
+	# Phenotypes
+	title = request.form['phenotype_title']
+	icd9_inclusion = request.form['icd9_inclusion']
+	icd9_exclusion = request.form['icd9_exclusion']
+	icd10_inclusion = request.form['icd10_inclusion']
+	icd10_exclusion = request.form['icd10_exclusion']
+	description = request.form['description']
+	medications = request.form['medications']
+
 	demographics_statement = demographics_table.insert().values(
 		sex=sex, 
 		age=age, 
@@ -189,10 +198,25 @@ def add_phenotype():
 		organization=organization, 
 		reference=reference)
 
-	conn.execute(demographics_statement)
-	conn.execute(lab_results_statement)
-	conn.execute(vital_signs_statement)
-	conn.execute(contributor_statement)
+	demographics_id = conn.execute(demographics_statement).inserted_primary_key[0]
+	lab_results_id = conn.execute(lab_results_statement).inserted_primary_key[0]
+	vital_signs_id = conn.execute(vital_signs_statement).inserted_primary_key[0]
+	contributors_id = conn.execute(contributor_statement).inserted_primary_key[0]
+
+	phenotypes_statement = phenotypes_table.insert().values(
+		title=title, 
+		icd9_inclusion=icd9_inclusion, 
+		icd9_exclusion=icd9_exclusion,
+		icd10_inclusion=icd10_inclusion,
+		icd10_exclusion=icd10_exclusion,
+		description=description,
+		medications=medications,
+		demographics_id=demographics_id,
+		lab_results_id=lab_results_id,
+		vital_signs_id=vital_signs_id,
+		contributors_id=contributors_id)
+
+	phenotypes_id = conn.execute(phenotypes_statement).inserted_primary_key[0]
 
 	return redirect(redirect_url())
 
