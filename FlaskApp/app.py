@@ -41,7 +41,7 @@ db = SQLAlchemy(app)
 #     app.run()
 
 from flask import Flask, render_template, redirect
-from flaskext.mysql import MySQL
+# from flaskext.mysql import MySQL
 from flask import request
 from flask import jsonify
 import phenotype_transfer as pt
