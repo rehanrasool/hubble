@@ -65,7 +65,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def main():
-    return render_template('dashboard.html')
+	return render_template('dashboard.html')
 
 @app.route('/lookup', methods=["POST"])
 def showSignUp():
@@ -82,10 +82,10 @@ def add_phenotype():
 
 # Helper function for redirecting back
 def redirect_url(default='index'):
-    return request.args.get('next') or request.referrer or url_for(default)
+	return request.args.get('next') or request.referrer or url_for(default)
 
 # app.run(debug=True)
 
 if __name__ == "__main__":
 	app.debug = True
-    app.run(debug=True, port=5000)
+	app.run(debug=True, port=5000)
