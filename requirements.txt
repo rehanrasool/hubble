@@ -8,3 +8,5 @@ WTForms==2.0.1
 Werkzeug==0.9.6
 gunicorn==19.0.0
 itsdangerous==0.24
+numpy==1.6.2
+pandas==0.8.1
