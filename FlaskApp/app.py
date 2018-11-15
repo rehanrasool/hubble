@@ -29,11 +29,19 @@ phenotypes_table = Table('phenotypes', meta,
 							Column('icd10_inclusion', String),
 							Column('icd10_exclusion', String),
 							Column('medications', String),
-							Column('lab_id', Integer),
+							Column('demographics_id', Integer),
+							Column('lab_results_id', Integer),
 							Column('vital_signs_id', Integer),
-							Column('contributer_id', Integer))
+							Column('contributers_id', Integer))
 
-lab_result_table = Table('lab_results', meta,  
+demographics_table = Table('demographics', meta,  
+							Column('id', Integer),
+							Column('sex', String),
+							Column('age', String),
+							Column('race', String),
+							Column('ethnicity', String))
+
+lab_results_table = Table('lab_results', meta,  
 							Column('id', Integer),
 							Column('red_blood_cells', String),
 							Column('white_blood_cells', String),
