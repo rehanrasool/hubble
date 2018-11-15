@@ -21,7 +21,7 @@ conn = db.connect()
 # print(rows)
 
 phenotypes_table = Table('phenotypes', meta,
-							Column('id', Integer),
+							Column('id', Integer, primary_key=True, autoincrement=True, nullable=True),
 							Column('title', String),
 							Column('description', String),
 							Column('icd9_inclusion', String),
@@ -35,14 +35,14 @@ phenotypes_table = Table('phenotypes', meta,
 							Column('contributors_id', Integer))
 
 demographics_table = Table('demographics', meta,
-							Column('id', Integer),
+							Column('id', Integer, primary_key=True, autoincrement=True, nullable=True),
 							Column('sex', String),
 							Column('age', String),
 							Column('race', String),
 							Column('ethnicity', String))
 
 lab_results_table = Table('lab_results', meta,
-							Column('id', Integer),
+							Column('id', Integer, primary_key=True, autoincrement=True, nullable=True),
 							Column('red_blood_cells', String),
 							Column('white_blood_cells', String),
 							Column('hemoglobin', String),
@@ -58,14 +58,14 @@ lab_results_table = Table('lab_results', meta,
 							Column('venous_values', String))
 
 vital_signs_table = Table('vital_signs', meta,
-							Column('id', Integer),
+							Column('id', Integer, primary_key=True, autoincrement=True, nullable=True),
 							Column('body_temperature', String),
 							Column('pulse_rate', String),
 							Column('respiration_rate', String),
 							Column('blood_pressure', String))
 
 contributors_table = Table('contributors', meta,
-							Column('id', Integer),
+							Column('id', Integer, primary_key=True, autoincrement=True, nullable=True),
 							Column('name', String),
 							Column('email', String),
 							Column('organization', String),
