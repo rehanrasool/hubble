@@ -44,7 +44,7 @@ from flask import Flask, render_template, redirect
 # from flaskext.mysql import MySQL
 from flask import request
 from flask import jsonify
-import phenotype_transfer as pt
+# import phenotype_transfer as pt
 
 app = Flask(__name__)
 
@@ -71,7 +71,8 @@ def main():
 def showSignUp():
 	req = request.json['search']
 	print("request: %s" % req)
-	resp = pt.find_phenotype(req)
+	# resp = pt.find_phenotype(req)
+	resp = "test response"
 	return jsonify(resp)
 
 @app.route('/add_phenotype', methods=["POST"])
