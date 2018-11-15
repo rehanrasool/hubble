@@ -1,20 +1,16 @@
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
-# DATABASE_URL = "postgres://qayojflkqzwdlk:c9b49b89f95625e0c1ed225aed3871a888ab41ca53d6d16078fe5f6416f8a402@ec2-23-23-80-20.compute-1.amazonaws.com:5432/dbr6s55rtq1vqg"
+# DATABASE_URL = "postgres://kbsvpvqhjkrrlo:4d168ed12be5e40e5578ed832857932faa8ba341b9a94fd19fa5426e5da1578d@ec2-23-23-153-145.compute-1.amazonaws.com:5432/d6b9rdf9dvnreh"
 
 import os
 import psycopg2
+import json
 
 DATABASE_URL = os.environ['DATABASE_URL']
 
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 cursor = conn.cursor()
-cursor.execute("SELECT * FROM Persons;")
-result = cursor.fetchall()
-print(result)
-
-
 
 # app = Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
@@ -59,24 +55,22 @@ from flask import Flask, render_template, redirect
 # from flaskext.mysql import MySQL
 from flask import request
 from flask import jsonify
-# import phenotype_transfer as pt
 
 app = Flask(__name__)
 
-# mysql = MySQL()
- 
-# MySQL configurations
-# app.config['MYSQL_DATABASE_USER'] = 'hubble'
-# app.config['MYSQL_DATABASE_PASSWORD'] = 'Hubbl3p@ss'
-# app.config['MYSQL_DATABASE_DB'] = 'hubble'
-# app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-# mysql.init_app(app)
-# conn = mysql.connect()
-# cursor = conn.cursor()
-# print(cursor)
-# cursor.execute("SELECT * FROM patients")
-# result = cursor.fetchall()
-# print(result)
+
+########################### helper functions ###########################
+
+def find_phenotype(phenotype):
+	print("looking for: %s" % phenotype)
+	cursor.execute("SELECT * FROM phenotypes;")
+	result = cursor.fetchall()
+	print(result)
+	output = json.dumps(result)
+	return output
+
+########################################################################
+
 
 @app.route("/")
 def main():
@@ -86,8 +80,7 @@ def main():
 def showSignUp():
 	req = request.json['search']
 	print("request: %s" % req)
-	# resp = pt.find_phenotype(req)
-	resp = "test response"
+	resp = find_phenotype(req)
 	return jsonify(resp)
 
 @app.route('/add_phenotype', methods=["POST"])
@@ -99,8 +92,6 @@ def add_phenotype():
 # Helper function for redirecting back
 def redirect_url(default='index'):
 	return request.args.get('next') or request.referrer or url_for(default)
-
-# app.run(debug=True)
 
 if __name__ == "__main__":
 	app.debug = True
