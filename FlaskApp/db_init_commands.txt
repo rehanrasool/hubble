@@ -1,0 +1,67 @@
+CREATE TABLE phenotypes (
+   id                      SERIAL PRIMARY KEY,
+   title VARCHAR(500)  NULL,
+   description VARCHAR(1000)  NULL,
+   icd9_inclusion           VARCHAR(500)  NULL,
+   icd9_exclusion              VARCHAR(500)  NULL,
+   icd10_inclusion          VARCHAR(500)  NULL,
+   icd10_exclusion            VARCHAR(500)  NULL,
+   medications            VARCHAR(500) NULL,
+   demographics_id                  INT NULL,
+   lab_results_id                  INT NULL,
+   vital_signs_id         INT NULL,
+   contributors_id INT NULL
+)
+;
+
+CREATE TABLE vital_signs (
+   id                      SERIAL PRIMARY KEY,
+   body_temperature          VARCHAR(500)  NULL,
+   pulse_rate            VARCHAR(500)  NULL,
+   respiration_rate          VARCHAR(500)  NULL,
+   blood_pressure            VARCHAR(500)  NULL
+)
+;
+
+CREATE TABLE contributors (
+   id            SERIAL PRIMARY KEY,
+   name          VARCHAR(500)  NULL,
+   email            VARCHAR(500)  NULL,
+   organization          VARCHAR(500)  NULL,
+   reference VARCHAR(500)  NULL
+)
+;
+
+CREATE TABLE lab_results (
+   id                      SERIAL PRIMARY KEY,
+   red_blood_cells          VARCHAR(500)  NULL,
+   white_blood_cells            VARCHAR(500)  NULL,
+   hemoglobin                         VARCHAR(500)  NULL,
+   hematocrit        VARCHAR(500)  NULL,
+   cardiac_makers         VARCHAR(500)  NULL,
+   general_chemistry      VARCHAR(500)  NULL,
+   urine             VARCHAR(500)  NULL,
+   coagulation      VARCHAR(500)  NULL,
+   cerebral_spine_fluid       VARCHAR(500)  NULL,
+   hemodynamic_parameters  VARCHAR(500)  NULL,
+   neurological_values    VARCHAR(500)  NULL,
+   arterial_values     VARCHAR(500)  NULL,
+   venous_values    VARCHAR(500)  NULL
+)
+;
+
+CREATE TABLE demographics (
+   id            SERIAL PRIMARY KEY,
+   sex          VARCHAR(500)  NULL,
+   age            VARCHAR(500)  NULL,
+   race          VARCHAR(500)  NULL,
+   ethnicity VARCHAR(500)  NULL
+)
+;
+
+
+INSERT INTO phenotypes(title) VALUES('Asthma?!');
+INSERT INTO vital_signs(body_temperature) VALUES('too hot');
+INSERT INTO contributors(name) VALUES('hubble');
+INSERT INTO lab_results(red_blood_cells) VALUES('too many');
+INSERT INTO demographics(age) VALUES('18+');
