@@ -76,10 +76,10 @@ contributers_table = Table('contributers', meta,
 # conn.execute(insert_statement)
 
 # Read
-select_statement = phenotypes_table.select()
-result_set = conn.execute(select_statement)
-for r in result_set:
-	print(r)
+# select_statement = phenotypes_table.select()
+# result_set = conn.execute(select_statement)
+# for r in result_set:
+# 	print(r)
 
 # # Update
 # update_statement = film_table.update().where(film_table.c.year=="2016").values(title = "Some2016Film")
@@ -118,8 +118,82 @@ def lookup():
 
 @app.route('/add_phenotype', methods=["POST"])
 def add_phenotype():
-	phenotype = request.form['phenotype']
-	print(phenotype)
+	print("########## New Phenotype ##########")
+	print(request.form)
+	print("########## New Phenotype ##########")
+
+
+	# Demographics
+	sex = request.form['sex']
+	age = request.form['age']
+	race = request.form['race']
+	ethnicity = request.form['ethnicity']
+
+	# Lab Results
+	red_blood_cells = request.form['red_blood_cells']
+	white_blood_cells = request.form['white_blood_cells']
+	hemoglobin = request.form['hemoglobin']
+	hematocrit = request.form['hematocrit']
+	cardiac_makers = request.form['cardiac_makers']
+	general_chemistry = request.form['general_chemistry']
+	urine = request.form['urine']
+	coagulation = request.form['coagulation']
+	cerebral_spine_fluid = request.form['cerebral_spine_fluid']
+	hemodynamic_parameters = request.form['hemodynamic_parameters']
+	neurological_values = request.form['neurological_values']
+	arterial_values = request.form['arterial_values']
+	venous_values = request.form['venous_values']
+
+	# Vital Signs
+	body_temperature = request.form['body_temperature']
+	blood_pressure = request.form['blood_pressure']
+	pulse_rate = request.form['pulse_rate']
+	respiration_rate = request.form['respiration_rate']
+
+	# Contributor
+	contributor_name = request.form['contributor_name']
+	organization = request.form['organization']
+	email = request.form['email']
+	reference = request.form['reference']
+
+	demographics_statement = demographics_table.insert().values(
+		sex=sex, 
+		age=age, 
+		race=race, 
+		ethnicity=ethnicity)
+
+	lab_results_statement = lab_results_table.insert().values(
+		red_blood_cells=red_blood_cells, 
+		white_blood_cells=white_blood_cells, 
+		hemoglobin=hemoglobin,
+		hematocrit=hematocrit,
+		cardiac_makers=cardiac_makers,
+		general_chemistry=general_chemistry,
+		urine=urine,
+		coagulation=coagulation,
+		cerebral_spine_fluid=cerebral_spine_fluid,
+		hemodynamic_parameters=hemodynamic_parameters,
+		neurological_values=neurological_values,
+		arterial_values=arterial_values,
+		venous_values=venous_values)
+
+	vital_signs_statement = vital_signs_table.insert().values(
+		body_temperature=body_temperature, 
+		pulse_rate=pulse_rate, 
+		respiration_rate=respiration_rate, 
+		blood_pressure=blood_pressure)
+
+	contributor_statement = contributors_table.insert().values(
+		name=contributor_name, 
+		email=email, 
+		organization=organization, 
+		reference=reference)
+
+	conn.execute(demographics_statement)
+	conn.execute(lab_results_statement)
+	conn.execute(vital_signs_statement)
+	conn.execute(contributor_statement)
+
 	return redirect(redirect_url())
 
 # Helper function for redirecting back
