@@ -1,52 +1,235 @@
-<!-- add phenotype modal -->
+<!-- Modal -->
 <div class="modal fade" id="addPhenotypeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-
-    <div class="modal-dialog modal-md" role="document">
-
-
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title w-100" id="myModalLabel">New Phenotype</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <form id="phenotype-form-submit" action="{{url_for('add_phenotype')}}" method="post">
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="phenotype" class="col-form-label">Phenotype</label>
-                    <input type="text" class="form-control" name="phenotype" value="{{ request.form.phenotype }}">
-                </div>
-
-                <div class="form-group">
-                    <label for="icd9" class="col-form-label">ICD-9</label>
-                    <button type="button" class="btn btn-secondary btn-sm" data-toggle="popover" title="ICD Format" data-content="ICD-9: XXX.XX ICD-10: XXX.XXX(X)">
-                        <i class="fa fa-location-arrow" aria-hidden="true"></i>
-                    </button>
-                    <div class="form-row">
-                        <div class="form-group col">
-                            <input type="text" class="form-control" name="icd9_inclusion" value="{{ request.form.icd9_inclusion }}" placeholder="inclusionary">
-                        </div>
-                        <div class="form-group col">
-                            <input type="text" class="form-control" name="icd9_exclusion" value="{{ request.form.icd9_exclusion }}" placeholder="exclusionary">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title w-100" id="myModalLabel">New Phenotype</h4>
+            </div>
+            
+            <form id="phenotype-form-test" action="{{url_for('add_phenotype')}}" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="md-form">
+                            <input type="text" class="form-control" name="phenotype" value="{{ request.form.phenotype }}">
+                            <label data-error="wrong" data-success="right" for="phenotype">Phenotype</label>
                         </div>
                     </div>
-                </div>
+                    
+                    <!--Accordion wrapper-->
+                    <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
 
-                <div class="form-group">
-                    <label for="icd10" class="col-form-label">ICD-10</label>
-
-
-                    <input type="text" class="form-control" name="icd10" value="{{ request.form.icd10 }}" placeholder="xxx.xxx(x)">
-                </div>
-
-            </div>
+                        <!-- ICD card -->
+                        <div class="card">
+                            <!-- Card header -->
+                            <div class="card-header" role="tab" id="headingOne1">
+                                <a data-toggle="collapse" data-parent="#accordionEx" aria-expanded="true" href="#collapseOne1"
+                                aria-controls="collapseOne1">
+                                <h5 class="mb-0">
+                                    ICD <i class="fa fa-angle-down rotate-icon"></i>
+                                </h5>
+                                </a>
+                            </div>
         
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary btn-sm">Save changes</button>
-            </div>
-        </form>
+                            <!-- Card body -->
+                            <div id="collapseOne1" class="collapse" role="tabpanel" aria-labelledby="headingOne1" data-parent="#accordionEx">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <div class="d-flex justify-content-between">
+                                            <label for="icd9" class="col-form-label">ICD-9</label>
+                                            <button type="button" class="btn btn-secondary btn-sm" data-toggle="popover" data-trigger="hover" title="ICD-9 Format" data-content="ICD-9: XXX.XX">
+                                                <i class="fa fa-info" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="md-form col mb-2">
+                                                <input type="text" class="form-control" name="icd9_inclusion" value="{{ request.form.icd9_inclusion }}">
+                                                <label data-error="wrong" data-success="right" for="icd9_inclusion">Inclusionary</label>
+                                            </div>
+                                            <div class="md-form col mb-2">
+                                                <input type="text" class="form-control" name="icd9_exclusion" value="{{ request.form.icd9_exclusion }}">
+                                                <label data-error="wrong" data-success="right" for="icd9_exclusion">Exclusionary</label>
+                                            </div>
+                                        </div>
+                    
+                                        <div class="d-flex justify-content-between">
+                                            <label for="icd10" class="col-form-label">ICD-10</label>
+                                            <button type="button" class="btn btn-secondary btn-sm" data-toggle="popover" data-trigger="hover" title="ICD-10 Format" data-content="ICD-10: XXX.XXX(X)">
+                                                <i class="fa fa-info" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="md-form col mb-2">
+                                                <input type="text" class="form-control" name="icd10_inclusion" value="{{ request.form.icd10_inclusion }}">
+                                                <label data-error="wrong" data-success="right" for="icd10_inclusion">Inclusionary</label>
+                                            </div>
+                                            <div class="md-form col mb-2">
+                                                <input type="text" class="form-control" name="icd10_exclusion" value="{{ request.form.icd10_exclusion }}">
+                                                <label data-error="wrong" data-success="right" for="icd10_exclusion">Exclusionary</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+        
+                        </div>
+                        <!-- ICD card -->
+        
+                        <!-- Vital card -->
+                        <div class="card">
+                    
+                            <!-- Card header -->
+                            <div class="card-header" role="tab" id="headingTwo2">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseTwo2"
+                                aria-expanded="false" aria-controls="collapseTwo2">
+                                <h5 class="mb-0">
+                                    Vital Signs <i class="fa fa-angle-down rotate-icon"></i>
+                                </h5>
+                                </a>
+                            </div>
+                    
+                            <!-- Card body -->
+                            <div id="collapseTwo2" class="collapse" role="tabpanel" aria-labelledby="headingTwo2" data-parent="#accordionEx">
+                                <div class="card-body">
+                                    <div class="md-form mb-2">
+                                        <input type="text" class="form-control" name="body_temp" value="{{ request.form.body_temp }}">
+                                        <label data-error="wrong" data-success="right" for="body_temp">Body Temperature</label>
+                                    </div>
+                                    <div class="md-form mb-2">
+                                        <input type="text" class="form-control" name="blood_pressure" value="{{ request.form.blood_pressure }}">
+                                        <label data-error="wrong" data-success="right" for="blood_pressure">Blood Temperature</label>
+                                    </div>
+                                    <div class="md-form mb-2">
+                                        <input type="text" class="form-control" name="heart_rate" value="{{ request.form.heart_rate }}">
+                                        <label data-error="wrong" data-success="right" for="heart_rate">Heart Rate</label>
+                                    </div>
+                                    <div class="md-form mb-2">
+                                        <input type="text" class="form-control" name="breathing_rate" value="{{ request.form.breathing_rate }}">
+                                        <label data-error="wrong" data-success="right" for="breathing_rate">Breathing Rate</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Vital card -->
+        
+                        <!-- Lab card -->
+                        <div class="card">
+                    
+                            <!-- Card header -->
+                            <div class="card-header" role="tab" id="headingThree3">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseThree3"
+                                aria-expanded="false" aria-controls="collapseThree3">
+                                <h5 class="mb-0">
+                                    Lab <i class="fa fa-angle-down rotate-icon"></i>
+                                </h5>
+                                </a>
+                            </div>
+                    
+                            <!-- Card body -->
+                            <div id="collapseThree3" class="collapse" role="tabpanel" aria-labelledby="headingThree3" data-parent="#accordionEx">
+                                <div class="card-body">
+                                    <div class="md-form mb-2">
+                                        <input type="text" class="form-control" name="rbc" value="{{ request.form.rbc }}">
+                                        <label data-error="wrong" data-success="right" for="rbc">Red Blood Cells</label>
+                                    </div>
+                                    <div class="md-form mb-2">
+                                        <input type="text" class="form-control" name="wbc" value="{{ request.form.wbc }}">
+                                        <label data-error="wrong" data-success="right" for="wbc">White Blood Cells</label>
+                                    </div>
+                                    <div class="md-form mb-2">
+                                        <input type="text" class="form-control" name="hemoglobin" value="{{ request.form.hemoglobin }}">
+                                        <label data-error="wrong" data-success="right" for="hemoglobin">Hemoglobin</label>
+                                    </div>
+                                </div>
+                            </div>
+                    
+                        </div>
+                        <!-- Lab card -->
+
+                        <!-- Medication card -->
+                        <div class="card">
+                            <!-- Card header -->
+                            <div class="card-header" role="tab" id="headingFour4">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseFour4"
+                                aria-expanded="false" aria-controls="collapseFour4">
+                                <h5 class="mb-0">
+                                    Medications <i class="fa fa-angle-down rotate-icon"></i>
+                                </h5>
+                                </a>
+                            </div>
+                    
+                            <!-- Card body -->
+                            <div id="collapseFour4" class="collapse" role="tabpanel" aria-labelledby="headingFour4" data-parent="#accordionEx">
+                                <div class="card-body">
+                                    <div class="md-form mb-2">
+                                        <input type="text" class="form-control" name="medication" value="{{ request.form.medication }}">
+                                        <label data-error="wrong" data-success="right" for="medication">Medication</label>
+                                    </div>
+                                </div>
+                            </div>
+                    
+                        </div>
+                        <!-- Medication card -->
+
+                        <!-- Description card -->
+                        <div class="card">
+                            <!-- Card header -->
+                            <div class="card-header" role="tab" id="headingFive5">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseFive5"
+                                aria-expanded="false" aria-controls="collapseFive5">
+                                <h5 class="mb-0">
+                                    Description <i class="fa fa-angle-down rotate-icon"></i>
+                                </h5>
+                                </a>
+                            </div>
+                    
+                            <!-- Card body -->
+                            <div id="collapseFive5" class="collapse" role="tabpanel" aria-labelledby="headingFive5" data-parent="#accordionEx">
+                                <div class="card-body">
+                                <!--Textarea with icon prefix-->
+                                    <div class="md-form">
+                                        <i class="fas fa-pencil-alt prefix"></i>
+                                        <label for="description">Description</label>
+                                        <textarea type="text" name='description' id="description" class="md-textarea form-control" rows="3" value="{{ request.form.description }}"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                    
+                        </div>
+                        <!-- Description card -->
+        
+                        <!-- Reference card -->
+                        <div class="card">
+                            <!-- Card header -->
+                            <div class="card-header" role="tab" id="headingSix6">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseSix6"
+                                aria-expanded="false" aria-controls="collapseSix6">
+                                <h5 class="mb-0">
+                                    Reference <i class="fa fa-angle-down rotate-icon"></i>
+                                </h5>
+                                </a>
+                            </div>
+                    
+                            <!-- Card body -->
+                            <div id="collapseSix6" class="collapse" role="tabpanel" aria-labelledby="headingSix6" data-parent="#accordionEx">
+                                <div class="card-body">
+                                    <div class="md-form mb-2">
+                                        <input type="text" class="form-control" name="reference" value="{{ request.form.reference }}">
+                                        <label data-error="wrong" data-success="right" for="reference">Reference</label>
+                                    </div>
+                                </div>
+                            </div>
+                    
+                        </div>
+                        <!-- Reference card -->
+                    </div>
+                    <!-- Accordion wrapper -->
+                </div>
+            
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Save changes</button>
+                </div>
+            </form>
+          </div>
+        </div>
       </div>
-    </div>
-</div>
