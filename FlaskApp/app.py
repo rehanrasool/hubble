@@ -1,9 +1,24 @@
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/pre-registration'
-db = SQLAlchemy(app)
+# DATABASE_URL = "postgres://qayojflkqzwdlk:c9b49b89f95625e0c1ed225aed3871a888ab41ca53d6d16078fe5f6416f8a402@ec2-23-23-80-20.compute-1.amazonaws.com:5432/dbr6s55rtq1vqg"
+
+import os
+import psycopg2
+
+DATABASE_URL = os.environ['DATABASE_URL']
+
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+cursor = conn.cursor()
+cursor.execute("SELECT * FROM Persons;")
+result = cursor.fetchall()
+print(result)
+
+
+
+# app = Flask(__name__)
+# app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
+# db = SQLAlchemy(app)
 
 # # Create our database model
 # class User(db.Model):
