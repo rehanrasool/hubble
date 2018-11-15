@@ -28,12 +28,12 @@ phenotypes_table = Table('phenotypes', meta,
 							Column('icd9_exclusion', String),
 							Column('icd10_inclusion', String),
 							Column('icd10_exclusion', String),
-							Column('lab_id', Integer),
 							Column('medications', String),
+							Column('lab_id', Integer),
 							Column('vital_signs_id', Integer),
-							Column('reference', String))
+							Column('contributer_id', Integer))
 
-lab_result_table = Table('lab_result', meta,  
+lab_result_table = Table('lab_results', meta,  
 							Column('id', Integer),
 							Column('red_blood_cells', String),
 							Column('white_blood_cells', String),
@@ -55,6 +55,13 @@ vital_signs_table = Table('vital_signs', meta,
 							Column('pulse_rate', String),
 							Column('respiration_rate', String),
 							Column('blood_pressure', String))
+
+contributers_table = Table('contributers', meta,  
+							Column('id', Integer),
+							Column('name', String),
+							Column('email', String),
+							Column('organization', String),
+							Column('reference', String))
 
 # # Create
 # insert_statement = film_table.insert().values(title="Doctor Strange", director="Scott Derrickson", year="2016")
