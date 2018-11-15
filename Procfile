@@ -1,1 +1,1 @@
-web: python FlaskApp/app.py $PORT
+web: gunicorn FlaskApp/app:app

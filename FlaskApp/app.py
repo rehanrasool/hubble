@@ -84,7 +84,8 @@ def add_phenotype():
 def redirect_url(default='index'):
     return request.args.get('next') or request.referrer or url_for(default)
 
-app.run(debug=True)
+# app.run(debug=True)
 
 if __name__ == "__main__":
+	app.debug = True
     app.run(debug=True, port=5000)
