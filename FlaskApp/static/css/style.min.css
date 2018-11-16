@@ -1,1 +1,35 @@
 .sidebar-fixed{height:100vh;width:270px;-webkit-box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);z-index:1050;background-color:#fff;padding:0 1.5rem 1.5rem}.sidebar-fixed .list-group .active{-webkit-box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);-webkit-border-radius:5px;border-radius:5px}.sidebar-fixed .logo-wrapper{padding:2.5rem}.sidebar-fixed .logo-wrapper img{max-height:50px}@media (min-width:1200px){.navbar,.page-footer,main{padding-left:270px}}@media (max-width:1199.98px){.sidebar-fixed{display:none}}
+
+.pheno-color-1 {
+	background-color: rgba(255,99,132,1) !important;
+}
+
+.pheno-color-2 {
+	background-color: rgba(54, 162, 235, 1) !important;
+}
+
+.pheno-color-3 {
+	background-color: rgba(255, 206, 86, 1) !important;
+}
+
+.pheno-color-4 {
+	background-color: rgba(75, 192, 192, 1) !important;
+}
+
+.pheno-color-5 {
+	background-color: rgba(153, 102, 255, 1) !important;
+}
+
+.pheno-color-6 {
+	background-color: rgba(255, 159, 64, 1) !important;
+}
+
+.list-tight {
+	height: 1% !important;
+	font-size: 75%;
+}
+
+.pheno-subtext {
+	font-size: 75%;
+	color: gray;
+}
