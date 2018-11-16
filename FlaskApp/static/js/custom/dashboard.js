@@ -3,6 +3,23 @@ console.log('loading')
 var phenotypes;
 var current_pheno;
 
+var phenotype_result = {}
+var execution_result = {}
+var comment_result = {}
+function generate_random_results() {
+	var data, phenotype_name;
+	var result_rands = [4400, 2500, 3400, 5000, 800]
+	var execution_rands = [421, 123, 33, 76, 756]
+	var comment_rands = [21, 34, 2, 13, 42]
+	for (var i=0; i<phenotypes.length; i++) {
+		data = phenotypes[i];
+		phenotype_name = data['title'];
+		phenotype_result[phenotype_name] = result_rands[i];
+		execution_result[phenotype_name] = execution_rands[i];
+		comment_result[phenotype_name] = comment_rands[i];
+	}
+}
+
 $("#search_button").click(function(){
 	console.log('loaded hubble')
 	var output = $("#search_query").val();
@@ -20,6 +37,7 @@ $("#search_button").click(function(){
 				console.log('got response')
 				phenotypes = response;
 				console.log(phenotypes);
+				generate_random_results(); // TODO: fix once we have data
 
 				// create left-panel
 				html = ""
@@ -174,12 +192,12 @@ function create_histogram() {
 	$('#main_panel').show();
 
 	// Gather phenotype result count
-	phenotype_result = {}
+	// phenotype_result = {}
 	var data, keys, phenotype_name;
 	for (var i=0; i<phenotypes.length; i++) {
 		data = phenotypes[i];
 		phenotype_name = data['title'];
-		phenotype_result[phenotype_name] = (i+1)*1000;
+		// phenotype_result[phenotype_name] = (i+1)*1000;
 		// console.log(fields);
 	}
 	// console.log(phenotype_result);
@@ -222,12 +240,10 @@ function create_histogram() {
 function create_summary() {
 	html = ""
 
-	phenotype_result = {}
 	var data, keys, phenotype_name;
 	for (var i=0; i<phenotypes.length; i++) {
 		data = phenotypes[i];
 		phenotype_name = data['title'];
-		phenotype_result[phenotype_name] = (i+1)*1000;
 		html+='<div class="progress md-progress"><div class="progress-bar pheno-color-' + (i+1).toString() + ' role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div>'
 		html+='<ul class="list-group">'
 		html+='<li class="list-group-item d-flex justify-content-between align-items-center">'
@@ -236,11 +252,11 @@ function create_summary() {
 		html+='</li>'
 		html+='<li class="list-group-item d-flex justify-content-between align-items-center list-tight">'
 		html+='Executions'
-		html+='<span class="badge badge-primary badge-pill pheno-color-' + (i+1).toString() + '">' + 100 + ' </span>'
+		html+='<span class="badge badge-primary badge-pill pheno-color-' + (i+1).toString() + '">' + execution_result[phenotype_name] + ' </span>'
 		html+='</li>'
 		html+='<li class="list-group-item d-flex justify-content-between align-items-center list-tight">'
 		html+='Comments'
-		html+='<span class="badge badge-primary badge-pill pheno-color-' + (i+1).toString() + '">' + 200 + ' </span>'
+		html+='<span class="badge badge-primary badge-pill pheno-color-' + (i+1).toString() + '">' + comment_result[phenotype_name] + ' </span>'
 		html+='</li>'
 		html+='</ul>'
 
