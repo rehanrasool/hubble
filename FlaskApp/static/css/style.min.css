@@ -34,6 +34,13 @@
 	color: gray;
 }
 
+.bg-mainpage {
+  background: url(bg.jpeg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 
 .s006 {
   min-height: 100vh;
@@ -44,7 +51,6 @@
   -ms-flex-align: center;
       align-items: center;
   font-family: 'Poppins', sans-serif;
-  background: url("../images/Searchs_006.png");
   background-size: cover;
   background-position: center center;
   padding: 15px;

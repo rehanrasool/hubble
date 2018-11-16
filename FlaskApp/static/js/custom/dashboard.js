@@ -432,7 +432,7 @@ function create_summary() {
 		html += '<ul class="list-group">'
 		html += '<li class="list-group-item d-flex justify-content-between align-items-center">'
 		html += '<h6>' + phenotype_name + '</h6>'
-		html += '<h6 class="pheno-subtext">Organization name</h6>'
+		// html += '<h6 class="pheno-subtext">Organization name</h6>'
 		html += '</li>'
 		html += '<li class="list-group-item d-flex justify-content-between align-items-center list-tight">'
 		html += 'Executions'
