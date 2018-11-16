@@ -87,10 +87,34 @@ function phenotype_click() {
 	// $('#main_panel').show();
 }
 
+
+function splitAndCap(string) {
+	str = string.split('_');
+	processedStr = '';
+	for (var i=0; i<str.length - 1; i++) {
+		processedStr += str[i].charAt(0).toUpperCase() + str[i].slice(1) + ' ';
+	}
+	processedStr += str[str.length - 1].charAt(0).toUpperCase() + str[str.length - 1].slice(1)
+	return processedStr;
+}
+
+function getDictContent(dict) {
+	content = '';
+	for (item in dict) {
+		if (item != 'id') {
+			name = splitAndCap(item)
+			content += '<p><strong>' + name + ':</strong> ' + dict[item] + '</p>';
+		}
+	}
+	return content;
+}
+
 $(document).on('click', '#phenotypes', phenotype_click_new);
 function phenotype_click_new() {
-	$('#phenotype_container').show();
 	var main_container = $('#phenotype_container');
+
+	// refresh card body
+	main_container.find('.card-body').empty();
 
 	var details_card = $('#details_card');
 	var icd_card = $('#icd_card');
@@ -100,15 +124,29 @@ function phenotype_click_new() {
 	var lab_results_card = $('#lab_results_card');
 
 	details = '<p><strong>Phenotype:</strong> ' + current_pheno['title'] + '</p>';
-	for (item in current_pheno['contributors']) {
-		if (item != 'id') {
-			details += '<p><strong>' + item + ':</strong> ' + current_pheno['contributors'][item] + '</p>';
-		}
-	}
+	details += getDictContent(current_pheno['contributors']);
+
+	icd = '<p><strong>ICD-9 Inclusion:</strong> ' + current_pheno['icd9_inclusion'] + '</p>';
+	icd += '<p><strong>ICD-9 Exclusion:</strong> ' + current_pheno['icd9_exclusion'] + '</p>';
+	icd += '<p><strong>ICD-10 Inclusion:</strong> ' + current_pheno['icd10_inclusion'] + '</p>';
+	icd += '<p><strong>ICD-10 Exclusion:</strong> ' + current_pheno['icd10_exclusion'] + '</p>';
+
+	medications = '<p><strong>Medications:</strong> ' + current_pheno['medications'] + '</p>';
+
+	demographics = getDictContent(current_pheno['demographics']);
+
+	vital_signs = getDictContent(current_pheno['vital_signs']);
+
+	lab_results = getDictContent(current_pheno['lab_results']);
 
 	details_card.children('.card-body').append(details);
-	
-	console.log('This: ' + current_pheno);
+	icd_card.children('.card-body').append(icd);
+	medications_card.children('.card-body').append(medications);
+	demographics_card.children('.card-body').append(demographics);
+	vital_signs_card.children('.card-body').append(vital_signs);
+	lab_results_card.children('.card-body').append(lab_results);
+
+	$('#phenotype_container').show();
 }
 
 function create_histogram() {
