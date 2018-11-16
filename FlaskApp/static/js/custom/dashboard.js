@@ -115,7 +115,7 @@ function phenotype_click() {
 	$('#left-panel a').removeClass('active');
 	$('#left-panel a').removeClassStartingWith('pheno-color');
 	$('#left-panel a').css('color', 'black');
-	$(this).addClass('active');
+	// $(this).addClass('active');
 	$(this).css('color', 'white');
 
 	var current = $(this).text();
