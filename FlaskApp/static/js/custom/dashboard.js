@@ -43,6 +43,67 @@ $("#informatics_submit_button").click(function () {
 	$('#submitted_message').show();
 })
 
+$("#fork_phenotype").click(function () {
+	var phenotype_modal = $('#addPhenotypeModal');
+	$('#myModalLabel').empty();
+	$('#myModalLabel').append("Fork Phenotype");
+
+	$('input[name=phenotype_title]').val(current_pheno['title']);
+	$('label[for=phenotype_title]').addClass('active');
+
+	var icd_inputs = $('#collapseOne1 input');
+
+	for (var i = 0; i < icd_inputs.length; i++) {
+		name = icd_inputs[i].name;
+		icd_inputs[i].value = current_pheno[name];
+		$('label[for=' + icd_inputs[i].name + ']').addClass('active');
+	}
+
+	var vital_inputs = $('#collapseTwo2 input');
+
+	for (var i = 0; i < vital_inputs.length; i++) {
+		name = vital_inputs[i].name;
+		vital_inputs[i].value = current_pheno['vital_signs'][name];
+		$('label[for=' + vital_inputs[i].name + ']').addClass('active');
+	}
+
+	var lab_inputs = $('#collapseThree3 input');
+
+	for (var i = 0; i < lab_inputs.length; i++) {
+		name = lab_inputs[i].name;
+		lab_inputs[i].value = current_pheno['lab_results'][name];
+		$('label[for=' + lab_inputs[i].name + ']').addClass('active');
+	}
+	
+	var demographics_inputs = $('#collapseDemographics input');
+
+	for (var i = 0; i < demographics_inputs.length; i++) {
+		name = demographics_inputs[i].name;
+		demographics_inputs[i].value = current_pheno['demographics'][name];
+		$('label[for=' + demographics_inputs[i].name + ']').addClass('active');
+	}
+
+	$('input[name=medications]').val(current_pheno['medications']);
+	$('label[for=medications]').addClass('active');
+
+	$('textarea[name=description]').val(current_pheno['description']);
+	$('label[for=description]').addClass('active');
+
+	var contributors_inputs = $('#collapseSix6 input');
+
+	for (var i = 0; i < contributors_inputs.length; i++) {
+		name = contributors_inputs[i].name;
+		if (name == 'contributor_name') {
+			contributors_inputs[i].value = current_pheno['contributors']['name'];
+			$('label[for=contributor_name]').addClass('active');
+		}
+		else {
+			contributors_inputs[i].value = current_pheno['contributors'][name];
+			$('label[for=' + contributors_inputs[i].name + ']').addClass('active');
+		}
+	}
+})
+
 $("#search_button").click(function () {
 	console.log('loaded hubble')
 	var output = $("#search_query").val();
