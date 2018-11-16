@@ -2,6 +2,7 @@ console.log('loading')
 
 var phenotypes;
 var current_pheno;
+var current_index;
 
 var phenotype_result = {}
 var execution_result = {}
@@ -69,9 +70,17 @@ $("#search_button").click(function(){
 
 })
 
+$.fn.removeClassStartingWith = function (filter) {
+    $(this).removeClass(function (index, className) {
+        return (className.match(new RegExp("\\S*" + filter + "\\S*", 'g')) || []).join(' ')
+    });
+    return this;
+};
+
 $(document).on('click', '#phenotypes_summary', phenotypes_summary_click);
 function phenotypes_summary_click() {
 	$('#left-panel a').removeClass('active');
+	$('#left-panel a').removeClassStartingWith('pheno-color');
 	$('#left-panel a').css('color', 'black');
 	$('#phenotype_container').hide();
 	$('#phenotypes_summary').addClass('active');
@@ -95,6 +104,7 @@ $(document).on('click', '#phenotypes', phenotype_click);
 function phenotype_click() {
 	$('#summary_panel').hide();
 	$('#left-panel a').removeClass('active');
+	$('#left-panel a').removeClassStartingWith('pheno-color');
 	$('#left-panel a').css('color', 'black');
 	$(this).addClass('active');
 	$(this).css('color', 'white');
@@ -108,10 +118,12 @@ function phenotype_click() {
 		keys = Object.keys(data);
 		if (data['title'] == current) {
 			current_pheno = phenotypes[i];
+			current_index = i;
 			break;
 		}
 	}
 
+	$(this).addClass('pheno-color-' + (current_index+1));
 	console.log(current_pheno);
 	// var phenotype_name = current_pheno['title'];
 
@@ -154,6 +166,28 @@ function phenotype_click_new() {
 	// refresh card body
 	main_container.find('.card-body').empty();
 
+	// summary card
+	var summary_card = $('#summary_card');
+	phenotype_name = current_pheno['title'];
+	html=""
+	html+='<div class="progress md-progress"><div class="progress-bar pheno-color-' + (current_index+1).toString() + ' role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div>'
+	html+='<ul class="list-group">'
+	html+='<li class="list-group-item d-flex justify-content-between align-items-center">'
+	html+='<h6>'+phenotype_name+'</h6>'
+	html+='<h6 class="pheno-subtext">Organization name</h6>'                   
+	html+='</li>'
+	html+='<li class="list-group-item d-flex justify-content-between align-items-center list-tight">'
+	html+='Executions'
+	html+='<span class="badge badge-primary badge-pill pheno-color-' + (current_index+1).toString() + '">' + execution_result[phenotype_name] + ' </span>'
+	html+='</li>'
+	html+='<li class="list-group-item d-flex justify-content-between align-items-center list-tight">'
+	html+='Comments'
+	html+='<span class="badge badge-primary badge-pill pheno-color-' + (current_index+1).toString() + '">' + comment_result[phenotype_name] + ' </span>'
+	html+='</li>'
+	html+='</ul>'
+	summary_card.children('.card-body').append(html);
+
+	// other cards
 	var details_card = $('#details_card');
 	var icd_card = $('#icd_card');
 	var medications_card = $('#medications_card');
