@@ -189,7 +189,7 @@ function phenotypes_summary_click() {
 	// create summary
 	create_summary();
 
-	$('#main_panel').hide();
+	// $('#main_panel').hide();
 	$('#summary_panel').show();
 }
 
@@ -468,6 +468,12 @@ function create_summary() {
 	$('#summary_panel_col2 .card-body').html(html);
 }
 
+console.log(window.location.href)
+
+function loaded_dashboard() {
+	$("#search_query").attr('value', 'Asthma');
+	$("#search_button").trigger("click");
+}
 
 // //pie
 // var ctxP = document.getElementById("pieChart").getContext('2d');
