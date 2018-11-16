@@ -181,31 +181,35 @@ function phenotype_click_new() {
 	html=""
 	html+='<div class="progress md-progress"><div class="progress-bar pheno-color-' + (current_index+1).toString() + ' role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div>'
 	html+='<ul class="list-group">'
-	html+='<li class="list-group-item d-flex justify-content-between align-items-center">'
-	html+='<h6>'+phenotype_name+'</h6>'
-	html+='<h6 class="pheno-subtext">Organization name</h6>'                   
+	html+='<li class="list-group-item text-center d-inline-block justify-content-between align-items-center">'
+	html+='<h5>'+phenotype_name+'</h5>'
 	html+='</li>'
-	html+='<li class="list-group-item d-flex justify-content-between align-items-center list-tight">'
-	html+='Executions'
+	html+='<li class="list-group-item text-center d-inline-block justify-content-between align-items-center">'
+	// html+='Matching Patients:<h4>'+phenotype_result[phenotype_name]+'</h4>'
+	html+='Matching Patients:<h2><span class="badge badge-primary badge-pill pheno-color-' + (current_index+1).toString() + '">' + phenotype_result[phenotype_name] + ' </span></h2>'
+	html+='</li>'
+	html+='<li class="list-group-item text-center d-inline-block justify-content-between align-items-center">'
+	html+='Executions: '
 	html+='<span class="badge badge-primary badge-pill pheno-color-' + (current_index+1).toString() + '">' + execution_result[phenotype_name] + ' </span>'
 	html+='</li>'
-	html+='<li class="list-group-item d-flex justify-content-between align-items-center list-tight">'
-	html+='Comments'
+	html+='<li class="list-group-item text-center d-inline-block justify-content-between align-items-center">'
+	html+='Comments: '
 	html+='<span class="badge badge-primary badge-pill pheno-color-' + (current_index+1).toString() + '">' + comment_result[phenotype_name] + ' </span>'
 	html+='</li>'
 	html+='</ul>'
 	summary_card.children('.card-body').append(html);
 
 	// other cards
-	var details_card = $('#details_card');
+	var contributor_card = $('#contributor_card');
 	var icd_card = $('#icd_card');
 	var medications_card = $('#medications_card');
 	var demographics_card = $('#demographics_card');
 	var vital_signs_card = $('#vital_signs_card');
 	var lab_results_card = $('#lab_results_card');
 
-	details = '<p><strong>Phenotype:</strong> ' + current_pheno['title'] + '</p>';
-	details += getDictContent(current_pheno['contributors']);
+	// contributor = '<p><strong>Phenotype:</strong> ' + current_pheno['title'] + '</p>';
+	contributor = ''
+	contributor += getDictContent(current_pheno['contributors']);
 
 	// icd = '<button type="button" class="btn-sm btn-outline-primary waves-effect">ICD-9 Inclusion</button>' + '<p>' + current_pheno['icd9_inclusion'] + '<p>';
 	// icd += '<button type="button" class="btn-sm btn-outline-primary waves-effect">ICD-9 Exclusion</button>' + '<p>' + current_pheno['icd9_exclusion'] + '<p>';
@@ -233,7 +237,7 @@ function phenotype_click_new() {
 
 	lab_results = getDictContent(current_pheno['lab_results']);
 
-	details_card.children('.card-body').append(details);
+	contributor_card.children('.card-body').append(contributor);
 	icd_card.children('.card-body').append(icd);
 	medications_card.children('.card-body').append(medications);
 	demographics_card.children('.card-body').append(demographics);
