@@ -30,6 +30,15 @@ function getRandomColor() {
 	return color;
 }
 
+$(document).keypress(function(e) {
+    if(e.which == 13) {
+        var search = $("#main_search").val();
+        $("#search_query").attr('value', search);
+        $("#search_button").trigger("click");
+
+    }
+});
+
 $("#informatics_submit_button").click(function () {
 	$('#submitted_message').show();
 })
@@ -105,6 +114,7 @@ function phenotypes_summary_click() {
 	// create summary
 	create_summary();
 
+	$('#main_panel').hide();
 	$('#summary_panel').show();
 }
 
