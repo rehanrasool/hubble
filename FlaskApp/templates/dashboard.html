@@ -44,10 +44,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link waves-effect" data-toggle="modal" data-target="#addPhenotypeModal">Add Phenotype</a>
+                            <a class="nav-link waves-effect" data-toggle="modal" data-target="#addPhenotypeModal">Add
+                                Phenotype</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link waves-effect" href="https://mdbootstrap.com/education/bootstrap/" target="_blank">Search Phenotypes</a>
+                            <a class="nav-link waves-effect" href="https://mdbootstrap.com/education/bootstrap/" target="_blank">Search
+                                Phenotypes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link waves-effect" href="https://mdbootstrap.com/material-design-for-bootstrap/"
@@ -78,14 +80,13 @@
         <!-- Sidebar -->
         <div class="sidebar-fixed position-fixed">
 
-<!--             <a class="logo-wrapper waves-effect">
+            <!--             <a class="logo-wrapper waves-effect">
                 HUBBLE
                 <img src="https://mdbootstrap.com/img/logo/mdb-email.png" class="img-fluid" alt="">
             </a> -->
 
             <!-- Brand -->
-            <a class="logo-wrapper waves-effect" href="https://mdbootstrap.com/material-design-for-bootstrap/"
-                target="_blank">
+            <a class="logo-wrapper waves-effect" href="https://mdbootstrap.com/material-design-for-bootstrap/" target="_blank">
                 <strong class="blue-text" style="font-size:45px">Hubble</strong>
             </a>
 
@@ -111,7 +112,7 @@
 
     <!--Main layout-->
     <main class="pt-5 mx-lg-5">
-        <div class="container-fluid mt-5">
+        <div class="container-fluid mt-5" id="main_container">
 
             <!-- Heading -->
             <div class="card mb-4 wow fadeIn">
@@ -138,6 +139,118 @@
 
             </div>
             <!-- Heading -->
+
+            <div class="container" style="display:none" id="phenotype_container">
+                <!--Grid row-->
+                <div class="row wow fadeIn">
+
+                    <!--Grid column-->
+                    <div class="col-md-6 mb-4">
+
+                        <!--Card Details-->
+                        <div class="card mb-4" id="details_card">
+                            <div class="card-header text-center">
+                                Details
+                            </div>
+
+                            <!--Card content-->
+                            <div class="card-body">
+
+                            </div>
+
+                        </div>
+                        <!--/.Card-->
+
+                        <!--Card ICD-->
+                        <div class="card mb-4" id="icd_card">
+
+                            <div class="card-header text-center">
+                                ICD
+                            </div>
+
+                            <!--Card content-->
+                            <div class="card-body">
+
+                            </div>
+
+                        </div>
+                        <!--/.Card-->
+
+                        <!--Card Medications-->
+                        <div class="card mb-4" id="medications_card">
+
+                            <div class="card-header text-center">
+                                Medications
+                            </div>
+
+                            <!--Card content-->
+                            <div class="card-body">
+
+                            </div>
+
+                        </div>
+                        <!--/.Card-->
+
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-md-6 mb-4">
+
+                        <!--Card Demographics-->
+                        <div class="card mb-4" id="demographics_card">
+
+                            <!-- Card header -->
+                            <div class="card-header text-center">
+                                Demographics
+                            </div>
+
+                            <!--Card content-->
+                            <div class="card-body">
+
+                            </div>
+
+                        </div>
+                        <!--/.Card-->
+
+                        <!--Card Vital Signs-->
+                        <div class="card mb-4" id="vital_signs_card">
+
+                            <!-- Card header -->
+                            <div class="card-header text-center">
+                                Vital Signs
+                            </div>
+
+                            <!--Card content-->
+                            <div class="card-body">
+
+                            </div>
+
+                        </div>
+                        <!--/.Card-->
+
+                        <!--Card Lab Results-->
+                        <div class="card mb-4" id="lab_results_card">
+
+                            <!-- Card header -->
+                            <div class="card-header text-center">
+                                Lab Results
+                            </div>
+
+                            <!--Card content-->
+                            <div class="card-body">
+
+                            </div>
+
+                        </div>
+                        <!--/.Card-->
+
+                    </div>
+                    <!--Grid column-->
+
+                </div>
+                <!--Grid row-->
+            </div>
 
             <!--Grid row-->
             <div class="row wow fadeIn" style="display:none" id="main_panel">
