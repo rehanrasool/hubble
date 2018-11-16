@@ -1,20 +1,21 @@
 <!-- Modal -->
 <div class="modal fade" id="addPhenotypeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title w-100" id="myModalLabel">New Phenotype</h4>
             </div>
-            
+
             <form id="phenotype-form-test" action="{{url_for('add_phenotype')}}" method="post">
                 <div class="modal-body">
                     <div class="form-group">
                         <div class="md-form">
-                            <input type="text" class="form-control" name="phenotype_title" value="{{ request.form.phenotype_title }}" required>
+                            <input type="text" class="form-control" name="phenotype_title" value="{{ request.form.phenotype_title }}"
+                                required>
                             <label data-error="wrong" data-success="right" for="phenotype_title">Phenotype</label>
                         </div>
                     </div>
-                    
+
                     <!--Accordion wrapper-->
                     <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
 
@@ -23,20 +24,22 @@
                             <!-- Card header -->
                             <div class="card-header" role="tab" id="headingOne1">
                                 <a data-toggle="collapse" data-parent="#accordionEx" aria-expanded="true" href="#collapseOne1"
-                                aria-controls="collapseOne1">
-                                <h5 class="mb-0">
-                                    ICD <i class="fa fa-angle-down rotate-icon"></i>
-                                </h5>
+                                    aria-controls="collapseOne1">
+                                    <h5 class="mb-0">
+                                        ICD <i class="fa fa-angle-down rotate-icon"></i>
+                                    </h5>
                                 </a>
                             </div>
-        
+
                             <!-- Card body -->
-                            <div id="collapseOne1" class="collapse" role="tabpanel" aria-labelledby="headingOne1" data-parent="#accordionEx">
+                            <div id="collapseOne1" class="collapse" role="tabpanel" aria-labelledby="headingOne1"
+                                data-parent="#accordionEx">
                                 <div class="card-body">
                                     <div class="form-group">
                                         <div class="d-flex justify-content-between">
                                             <label for="icd9" class="col-form-label">ICD-9</label>
-                                            <button type="button" class="btn btn-secondary btn-sm" data-toggle="popover" data-trigger="hover" title="ICD-9 Format" data-content="ICD-9: XXX.XX">
+                                            <button type="button" class="btn btn-secondary btn-sm" data-toggle="popover"
+                                                data-trigger="hover" title="ICD-9 Format" data-content="ICD-9: XXX.XX">
                                                 <i class="fa fa-info" aria-hidden="true"></i>
                                             </button>
                                         </div>
@@ -50,10 +53,11 @@
                                                 <label data-error="wrong" data-success="right" for="icd9_exclusion">Exclusionary</label>
                                             </div>
                                         </div>
-                    
+
                                         <div class="d-flex justify-content-between">
                                             <label for="icd10" class="col-form-label">ICD-10</label>
-                                            <button type="button" class="btn btn-secondary btn-sm" data-toggle="popover" data-trigger="hover" title="ICD-10 Format" data-content="ICD-10: XXX.XXX(X)">
+                                            <button type="button" class="btn btn-secondary btn-sm" data-toggle="popover"
+                                                data-trigger="hover" title="ICD-10 Format" data-content="ICD-10: XXX.XXX(X)">
                                                 <i class="fa fa-info" aria-hidden="true"></i>
                                             </button>
                                         </div>
@@ -70,33 +74,36 @@
                                     </div>
                                 </div>
                             </div>
-        
+
                         </div>
                         <!-- ICD card -->
-        
+
                         <!-- Vital card -->
                         <div class="card">
-                    
+
                             <!-- Card header -->
                             <div class="card-header" role="tab" id="headingTwo2">
                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseTwo2"
-                                aria-expanded="false" aria-controls="collapseTwo2">
-                                <h5 class="mb-0">
-                                    Vital Signs <i class="fa fa-angle-down rotate-icon"></i>
-                                </h5>
+                                    aria-expanded="false" aria-controls="collapseTwo2">
+                                    <h5 class="mb-0">
+                                        Vital Signs <i class="fa fa-angle-down rotate-icon"></i>
+                                    </h5>
                                 </a>
                             </div>
-                    
+
                             <!-- Card body -->
-                            <div id="collapseTwo2" class="collapse" role="tabpanel" aria-labelledby="headingTwo2" data-parent="#accordionEx">
+                            <div id="collapseTwo2" class="collapse" role="tabpanel" aria-labelledby="headingTwo2"
+                                data-parent="#accordionEx">
                                 <div class="card-body">
                                     <div class="md-form mb-2">
                                         <input type="text" class="form-control" name="body_temperature" value="{{ request.form.body_temperature }}">
-                                        <label data-error="wrong" data-success="right" for="body_temperature">Body Temperature</label>
+                                        <label data-error="wrong" data-success="right" for="body_temperature">Body
+                                            Temperature</label>
                                     </div>
                                     <div class="md-form mb-2">
                                         <input type="text" class="form-control" name="blood_pressure" value="{{ request.form.blood_pressure }}">
-                                        <label data-error="wrong" data-success="right" for="blood_pressure">Blood Pressure</label>
+                                        <label data-error="wrong" data-success="right" for="blood_pressure">Blood
+                                            Pressure</label>
                                     </div>
                                     <div class="md-form mb-2">
                                         <input type="text" class="form-control" name="pulse_rate" value="{{ request.form.pulse_rate }}">
@@ -104,36 +111,40 @@
                                     </div>
                                     <div class="md-form mb-2">
                                         <input type="text" class="form-control" name="respiration_rate" value="{{ request.form.respiration_rate }}">
-                                        <label data-error="wrong" data-success="right" for="respiration_rate">Respiration Rate</label>
+                                        <label data-error="wrong" data-success="right" for="respiration_rate">Respiration
+                                            Rate</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- Vital card -->
-        
+
                         <!-- Lab card -->
                         <div class="card">
-                    
+
                             <!-- Card header -->
                             <div class="card-header" role="tab" id="headingThree3">
                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseThree3"
-                                aria-expanded="false" aria-controls="collapseThree3">
-                                <h5 class="mb-0">
-                                    Lab Results <i class="fa fa-angle-down rotate-icon"></i>
-                                </h5>
+                                    aria-expanded="false" aria-controls="collapseThree3">
+                                    <h5 class="mb-0">
+                                        Lab Results <i class="fa fa-angle-down rotate-icon"></i>
+                                    </h5>
                                 </a>
                             </div>
-                    
+
                             <!-- Card body -->
-                            <div id="collapseThree3" class="collapse" role="tabpanel" aria-labelledby="headingThree3" data-parent="#accordionEx">
+                            <div id="collapseThree3" class="collapse" role="tabpanel" aria-labelledby="headingThree3"
+                                data-parent="#accordionEx">
                                 <div class="card-body">
                                     <div class="md-form mb-2">
                                         <input type="text" class="form-control" name="red_blood_cells" value="{{ request.form.red_blood_cells }}">
-                                        <label data-error="wrong" data-success="right" for="red_blood_cells">Red Blood Cells</label>
+                                        <label data-error="wrong" data-success="right" for="red_blood_cells">Red Blood
+                                            Cells</label>
                                     </div>
                                     <div class="md-form mb-2">
                                         <input type="text" class="form-control" name="white_blood_cells" value="{{ request.form.white_blood_cells }}">
-                                        <label data-error="wrong" data-success="right" for="white_blood_cells">White Blood Cells</label>
+                                        <label data-error="wrong" data-success="right" for="white_blood_cells">White
+                                            Blood Cells</label>
                                     </div>
                                     <div class="md-form mb-2">
                                         <input type="text" class="form-control" name="hemoglobin" value="{{ request.form.hemoglobin }}">
@@ -145,11 +156,13 @@
                                     </div>
                                     <div class="md-form mb-2">
                                         <input type="text" class="form-control" name="cardiac_makers" value="{{ request.form.cardiac_makers }}">
-                                        <label data-error="wrong" data-success="right" for="cardiac_makers">Cardiac Makers</label>
+                                        <label data-error="wrong" data-success="right" for="cardiac_makers">Cardiac
+                                            Makers</label>
                                     </div>
                                     <div class="md-form mb-2">
                                         <input type="text" class="form-control" name="general_chemistry" value="{{ request.form.general_chemistry }}">
-                                        <label data-error="wrong" data-success="right" for="general_chemistry">General Chemistry</label>
+                                        <label data-error="wrong" data-success="right" for="general_chemistry">General
+                                            Chemistry</label>
                                     </div>
                                     <div class="md-form mb-2">
                                         <input type="text" class="form-control" name="urine" value="{{ request.form.urine }}">
@@ -161,27 +174,32 @@
                                     </div>
                                     <div class="md-form mb-2">
                                         <input type="text" class="form-control" name="cerebral_spine_fluid" value="{{ request.form.cerebral_spine_fluid }}">
-                                        <label data-error="wrong" data-success="right" for="cerebral_spine_fluid">Cerebral Spine Fluid</label>
+                                        <label data-error="wrong" data-success="right" for="cerebral_spine_fluid">Cerebral
+                                            Spine Fluid</label>
                                     </div>
                                     <div class="md-form mb-2">
                                         <input type="text" class="form-control" name="hemodynamic_parameters" value="{{ request.form.hemodynamic_parameters }}">
-                                        <label data-error="wrong" data-success="right" for="hemodynamic_parameters">Hemodynamic Parameters</label>
+                                        <label data-error="wrong" data-success="right" for="hemodynamic_parameters">Hemodynamic
+                                            Parameters</label>
                                     </div>
                                     <div class="md-form mb-2">
                                         <input type="text" class="form-control" name="neurological_values" value="{{ request.form.neurological_values }}">
-                                        <label data-error="wrong" data-success="right" for="neurological_values">Neurological Values</label>
+                                        <label data-error="wrong" data-success="right" for="neurological_values">Neurological
+                                            Values</label>
                                     </div>
                                     <div class="md-form mb-2">
                                         <input type="text" class="form-control" name="arterial_values" value="{{ request.form.arterial_values }}">
-                                        <label data-error="wrong" data-success="right" for="arterial_values">Arterial Values</label>
+                                        <label data-error="wrong" data-success="right" for="arterial_values">Arterial
+                                            Values</label>
                                     </div>
                                     <div class="md-form mb-2">
                                         <input type="text" class="form-control" name="venous_values" value="{{ request.form.venous_values }}">
-                                        <label data-error="wrong" data-success="right" for="venous_values">Venous Values</label>
+                                        <label data-error="wrong" data-success="right" for="venous_values">Venous
+                                            Values</label>
                                     </div>
                                 </div>
                             </div>
-                    
+
                         </div>
                         <!-- Lab card -->
 
@@ -190,15 +208,16 @@
                             <!-- Card header -->
                             <div class="card-header" role="tab" id="demographics">
                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseDemographics"
-                                aria-expanded="false" aria-controls="collapseDemographics">
-                                <h5 class="mb-0">
-                                    Demographics <i class="fa fa-angle-down rotate-icon"></i>
-                                </h5>
+                                    aria-expanded="false" aria-controls="collapseDemographics">
+                                    <h5 class="mb-0">
+                                        Demographics <i class="fa fa-angle-down rotate-icon"></i>
+                                    </h5>
                                 </a>
                             </div>
-                    
+
                             <!-- Card body -->
-                            <div id="collapseDemographics" class="collapse" role="tabpanel" aria-labelledby="demographics" data-parent="#accordionEx">
+                            <div id="collapseDemographics" class="collapse" role="tabpanel" aria-labelledby="demographics"
+                                data-parent="#accordionEx">
                                 <div class="card-body">
                                     <div class="md-form mb-2">
                                         <input type="text" class="form-control" name="sex" value="{{ request.form.sex }}">
@@ -218,7 +237,7 @@
                                     </div>
                                 </div>
                             </div>
-                    
+
                         </div>
                         <!-- Demographics card -->
 
@@ -227,15 +246,16 @@
                             <!-- Card header -->
                             <div class="card-header" role="tab" id="headingFour4">
                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseFour4"
-                                aria-expanded="false" aria-controls="collapseFour4">
-                                <h5 class="mb-0">
-                                    Medications <i class="fa fa-angle-down rotate-icon"></i>
-                                </h5>
+                                    aria-expanded="false" aria-controls="collapseFour4">
+                                    <h5 class="mb-0">
+                                        Medications <i class="fa fa-angle-down rotate-icon"></i>
+                                    </h5>
                                 </a>
                             </div>
-                    
+
                             <!-- Card body -->
-                            <div id="collapseFour4" class="collapse" role="tabpanel" aria-labelledby="headingFour4" data-parent="#accordionEx">
+                            <div id="collapseFour4" class="collapse" role="tabpanel" aria-labelledby="headingFour4"
+                                data-parent="#accordionEx">
                                 <div class="card-body">
                                     <div class="md-form mb-2">
                                         <input type="text" class="form-control" name="medications" value="{{ request.form.medications }}">
@@ -243,7 +263,7 @@
                                     </div>
                                 </div>
                             </div>
-                    
+
                         </div>
                         <!-- Medication card -->
 
@@ -252,46 +272,50 @@
                             <!-- Card header -->
                             <div class="card-header" role="tab" id="headingFive5">
                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseFive5"
-                                aria-expanded="false" aria-controls="collapseFive5">
-                                <h5 class="mb-0">
-                                    Description <i class="fa fa-angle-down rotate-icon"></i>
-                                </h5>
+                                    aria-expanded="false" aria-controls="collapseFive5">
+                                    <h5 class="mb-0">
+                                        Description <i class="fa fa-angle-down rotate-icon"></i>
+                                    </h5>
                                 </a>
                             </div>
-                    
+
                             <!-- Card body -->
-                            <div id="collapseFive5" class="collapse" role="tabpanel" aria-labelledby="headingFive5" data-parent="#accordionEx">
+                            <div id="collapseFive5" class="collapse" role="tabpanel" aria-labelledby="headingFive5"
+                                data-parent="#accordionEx">
                                 <div class="card-body">
-                                <!--Textarea with icon prefix-->
+                                    <!--Textarea with icon prefix-->
                                     <div class="md-form">
                                         <i class="fas fa-pencil-alt prefix"></i>
                                         <label for="description">Description</label>
-                                        <textarea type="text" name='description' id="description" class="md-textarea form-control" rows="3" value="{{ request.form.description }}"></textarea>
+                                        <textarea type="text" name='description' id="description" class="md-textarea form-control"
+                                            rows="3" value="{{ request.form.description }}"></textarea>
                                     </div>
                                 </div>
                             </div>
-                    
+
                         </div>
                         <!-- Description card -->
-        
+
                         <!-- Reference card -->
                         <div class="card">
                             <!-- Card header -->
                             <div class="card-header" role="tab" id="headingSix6">
                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseSix6"
-                                aria-expanded="false" aria-controls="collapseSix6">
-                                <h5 class="mb-0">
-                                    Contributor <i class="fa fa-angle-down rotate-icon"></i>
-                                </h5>
+                                    aria-expanded="false" aria-controls="collapseSix6">
+                                    <h5 class="mb-0">
+                                        Contributor <i class="fa fa-angle-down rotate-icon"></i>
+                                    </h5>
                                 </a>
                             </div>
-                    
+
                             <!-- Card body -->
-                            <div id="collapseSix6" class="collapse" role="tabpanel" aria-labelledby="headingSix6" data-parent="#accordionEx">
+                            <div id="collapseSix6" class="collapse" role="tabpanel" aria-labelledby="headingSix6"
+                                data-parent="#accordionEx">
                                 <div class="card-body">
                                     <div class="md-form mb-2">
                                         <input type="text" class="form-control" name="contributor_name" value="{{ request.form.contributor_name }}">
-                                        <label data-error="wrong" data-success="right" for="contributor_name">Contributor's Name</label>
+                                        <label data-error="wrong" data-success="right" for="contributor_name">Contributor's
+                                            Name</label>
                                     </div>
                                     <div class="md-form mb-2">
                                         <input type="text" class="form-control" name="organization" value="{{ request.form.organization }}">
@@ -307,18 +331,42 @@
                                     </div>
                                 </div>
                             </div>
-                    
+
                         </div>
                         <!-- Reference card -->
                     </div>
                     <!-- Accordion wrapper -->
                 </div>
-            
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary btn-sm">Save changes</button>
                 </div>
             </form>
-          </div>
         </div>
-      </div>
+    </div>
+</div>
+
+<!-- Central Modal Small -->
+<div class="modal fade" id="chartModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+    <!-- Change class .modal-sm to change the size of the modal -->
+    <div class="modal-dialog modal-sm" role="document">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title w-100" id="myModalLabel">Modal title</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Central Modal Small -->
