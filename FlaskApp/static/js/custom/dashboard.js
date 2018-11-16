@@ -30,6 +30,10 @@ function getRandomColor() {
 	return color;
 }
 
+$("#informatics_submit_button").click(function () {
+	$('#submitted_message').show();
+})
+
 $("#search_button").click(function () {
 	console.log('loaded hubble')
 	var output = $("#search_query").val();

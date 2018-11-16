@@ -370,3 +370,40 @@
     </div>
 </div>
 <!-- Central Modal Small -->
+
+<!--Modal: Login / Register Form Demo-->
+<div class="modal fade" id="submitToInformaticsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLabel">SUBMIT TO INFORMATICS</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- Description card -->
+            <div class="card">
+
+                <div class="md-form">
+                    <i class="fas fa-pencil-alt prefix"></i>
+                    <label for="description">Request Details</label>
+                    <textarea type="text" name='description' id="description" class="md-textarea form-control"
+                        rows="3" value="{{ request.form.description }}"></textarea>
+                </div>
+
+            </div>
+            <div class="modal-body text-center alert alert-success" role="alert" style="display:none" id="submitted_message">
+                Your request has been successfully submitted to Informatics.
+                <br \>
+                <br \>
+                You will receive a notification when they have reviewed your request.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary btn-sm" id="informatics_submit_button">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal: Login / Register Form Demo-->
