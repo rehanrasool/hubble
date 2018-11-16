@@ -39,7 +39,7 @@ $("#search_button").click(function(){
 				$('#left-panel').show();
 
 				// create histogram and summary
-				phenotypes_summary_click()
+				phenotypes_summary_click();
 			},
 			error: function(error) {
 				console.log('got error')
