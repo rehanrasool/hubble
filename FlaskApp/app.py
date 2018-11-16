@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, jsonify
+from flask import Flask, render_template, request, redirect, jsonify, url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 from sqlalchemy import Table, Column, String, MetaData, Integer, select
@@ -134,15 +134,9 @@ def find_phenotype(phenotype):
 @app.route("/")
 def main():
 	return render_template('index.html')
-	# return render_template('dashboard.html')
 
-@app.route("/dashboard", methods=["POST"])
+@app.route("/dashboard")
 def dashboard():
-	print('asdasasdsads')
-	return redirect(url_for('foo'))
-	# return render_template('dashboard.html')
-@app.route('/foo')
-def foo():
 	return render_template('dashboard.html')
 
 @app.route('/lookup', methods=["POST"])

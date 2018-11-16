@@ -15,7 +15,7 @@
   </head>
   <body>
     <div class="s006 bg-mainpage">
-          <form onkeypress="return event.keyCode != 13" action="{{url_for('dashboard')}}" method="POST">
+          <form onkeypress="return event.keyCode != 13" action="{{url_for('dashboard')}}" method="post">
             <fieldset>
               <legend>Hubble Health</legend>
               <legend>What are you looking for?</legend>
@@ -31,6 +31,7 @@
               </div>
               <h6> Common search:</h6>
               <div class="suggestion-wrap">
+                <a href="/dashboard" id="search" hidden>link</a>
                 <span>Asthma</span>
                 <span>Depression</span>
                 <span>Heart Disease</span>

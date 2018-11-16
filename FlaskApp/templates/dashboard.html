@@ -38,7 +38,7 @@
 
                     <!-- Left -->
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
+                        <li class="nav-item">
                             <a class="nav-link waves-effect" href="#">Home
                                 <span class="sr-only">(current)</span>
                             </a>
@@ -52,13 +52,18 @@
                                 Phenotypes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link waves-effect" href="#">About us</a>
+                            <a class="nav-link waves-effect" href="http://buildboard-10044.cornelltech.io/fall-2018/team_pages/pc102-weill-cornell-medicine.html" target="_blank">About us</a>
                         </li>
                     </ul>
 
                     <!-- Right -->
                     <ul class="navbar-nav nav-flex-icons">
                         <li class="nav-item">
+                            <a href="https://github.com/rehanrasool/hubble" target="_blank" class="nav-link waves-effect">
+                                <i class="fa fa-github"></i>
+                            </a>
+                        </li>
+                        <!-- <li class="nav-item">
                             <a href="#" class="nav-link waves-effect">
                                 <i class="fa fa-facebook"></i>
                             </a>
@@ -67,7 +72,7 @@
                             <a href="#" class="nav-link waves-effect">
                                 <i class="fa fa-twitter"></i>
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
 
                 </div>
@@ -120,8 +125,6 @@
                 <div class="card-body d-sm-flex justify-content-between">
 
                     <h4 class="mb-2 mb-sm-0 pt-1">
-                        <a href="#">Home Page</a>
-                        <span>/</span>
                         <span>Dashboard</span>
                     </h4>
 
@@ -131,7 +134,6 @@
                         <button class="btn btn-primary btn-sm my-0 p" type="submit" id="search_button">
                             <i class="fa fa-search"></i>
                         </button>
-
                     </div>
 
                 </div>
@@ -300,12 +302,12 @@
                 <div class="col-md-12 mb-4 align-content-center" id="main_panel_col1">
 
                     <!--Card-->
-                    <div class="card text-center bg-mainpage">
+                    <div class="card text-center" style="background-image: url({{ url_for('static', filename='img/bg.jpeg') }})">
 
                         <!--Card content-->
                         <div class="card-body">
                             <div class="s006">
-                                  <form onkeypress="return event.keyCode != 13">
+                                  <form >
                                     <fieldset>
                                       <legend>What are you looking for?</legend>
                                       <div class="inner-form">
@@ -315,7 +317,7 @@
                                               <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
                                             </svg>
                                           </button>
-                                          <input id="main_search" type="text" placeholder="Type your query" value="" aria-label="Search"/>
+                                          <input id="search" type="text" placeholder="Type your query" value="" aria-label="Search"/>
                                         </div>
                                       </div>
                                       <h6> Common search:</h6>

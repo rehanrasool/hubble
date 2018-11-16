@@ -32,22 +32,23 @@ function getRandomColor() {
 
 $(document).keypress(function(e) {
     if(e.which == 13) {
-    	$.ajax({
-		url: '/dashboard',
-		type: 'POST',
-		success: function (response) {
-			console.log('got response')
-		},
-		error: function (error) {
-			console.log('got error')
-			console.log(error);
-		}
-	});
-        var search = $("#main_search").val();
-        window.location.replace("dashboard.html");
+		$("#search")[0].click()
+    	// $.ajax({
+		// url: '/dashboard',
+		// type: 'POST',
+		// success: function (response) {
+		// 	console.log('got response')
+		// },
+		// error: function (error) {
+		// 	console.log('got error')
+		// 	console.log(error);
+		// }
+	// });
+        // var search = $("#main_search").val();
+        // window.location.replace("dashboard.html");
 
-        $("#search_query").attr('value', search);
-        $("#search_button").trigger("click");
+        // $("#search_query").attr('value', search);
+        // $("#search_button").trigger("click");
 
     }
 });
@@ -326,10 +327,14 @@ function phenotype_click_new() {
 	vital_signs_card.children('.card-body').append(vital_signs);
 	lab_results_card.children('.card-body').append(lab_results);
 
-	$('#medications_card .card-body').append('<div class="card-footer text-center"> \ <button id="chartBtn" type="button" class="btn btn-outline-primary waves-effect" \
+	$('#medications_card .card-body').append('<div class="card-footer text-center"> \ <button id="chartBtn" type="button" class="badge badge-pill badge-default waves-effect" \
 		 data-toggle="modal" data-target="#chartModal" data-from="medications"> \
 		<i class="fa fa-pie-chart"></i> \
 		</button></div>');
+
+	$('button[data-target="#chartModal"]').each(function() {
+		$(this).addClass('pheno-color-' + (current_index+1));
+	});
 
 	$('#phenotype_container').show();
 }
