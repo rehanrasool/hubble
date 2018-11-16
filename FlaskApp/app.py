@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
-from sqlalchemy import Table, Column, String, MetaData, Integer
+from sqlalchemy import Table, Column, String, MetaData, Integer, select
 # from flaskext.mysql import MySQL
 
 # DATABASE_URL = "postgres://kbsvpvqhjkrrlo:4d168ed12be5e40e5578ed832857932faa8ba341b9a94fd19fa5426e5da1578d@ec2-23-23-153-145.compute-1.amazonaws.com:5432/d6b9rdf9dvnreh"
@@ -93,12 +93,40 @@ contributors_table = Table('contributors', meta,
 
 def find_phenotype(phenotype):
 	print("looking for: %s" % phenotype)
-	select_statement = phenotypes_table.select()
+	phenotype_statement = phenotypes_table.select()
 	result = []
-	# for r in conn.execute(select_statement):
+	# for r in conn.execute(phenotype_statement):
 	# 	result.append(r)
-	rows = conn.execute(select_statement)
+	rows = conn.execute(phenotype_statement)
 	list_of_dicts = [{key: value for (key, value) in row.items()} for row in rows]
+
+	for phenotype in list_of_dicts:
+		demographics_id = phenotype['demographics_id']
+		lab_results_id = phenotype['lab_results_id']
+		vital_signs_id = phenotype['vital_signs_id']
+		contributors_id = phenotype['contributors_id']
+
+		# demographic dictionary
+		demographics_statement = demographics_table.select().where(demographics_table.c.id==demographics_id)
+		demographics_dict = [{key: value for (key, value) in row.items()} for row in conn.execute(demographics_statement)]
+		
+		# lab_results dictionary
+		lab_results_statement = lab_results_table.select().where(lab_results_table.c.id==lab_results_id)
+		lab_results_dict = [{key: value for (key, value) in row.items()} for row in conn.execute(lab_results_statement)]
+
+		# vital_signs dictionary
+		vital_signs_statement = vital_signs_table.select().where(vital_signs_table.c.id==vital_signs_id)
+		vital_signs_dict = [{key: value for (key, value) in row.items()} for row in conn.execute(vital_signs_statement)]
+
+		# contributors dictionary
+		contributors_statement = contributors_table.select().where(contributors_table.c.id==contributors_id)
+		contributors_dict = [{key: value for (key, value) in row.items()} for row in conn.execute(contributors_statement)]
+		
+		phenotype['demographics'] = demographics_dict[0]
+		phenotype['lab_results'] = lab_results_dict[0]
+		phenotype['vital_signs'] = vital_signs_dict[0]
+		phenotype['contributors'] = contributors_dict[0]
+
 	return list_of_dicts
 
 ########################################################################
@@ -110,9 +138,9 @@ def main():
 @app.route('/lookup', methods=["POST"])
 def lookup():
 	req = request.json['search']
-	print("request: %s" % req)
+	#print("request: %s" % req)
 	resp = find_phenotype(req)
-	print(resp)
+	#print(resp)
 	# return jsonify(resp)
 	return jsonify(resp)
 

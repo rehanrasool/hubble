@@ -1,6 +1,7 @@
 console.log('loading')
 
 var phenotypes;
+var current_pheno;
 
 $("#search_button").click(function(){
 	console.log('loaded hubble')
@@ -22,6 +23,10 @@ $("#search_button").click(function(){
 
 				// create left-panel
 				html = ""
+				html += '<a id="phenotypes_summary" class="list-group-item list-group-item-action waves-effect">';
+					// html += '<i class="fa fa-pie-chart mr-3"></i>' + Summary;
+					html += 'Summary';
+					html += '</a>';
 				for (var i=0; i<phenotypes.length; i++) {
 					var data = phenotypes[i];
 					// console.log(data)
@@ -33,12 +38,8 @@ $("#search_button").click(function(){
 				$('#left-panel').html(html);
 				$('#left-panel').show();
 
-				// create histogram
-				create_histogram();
-
-				// create summary
-				create_summary();
-
+				// create histogram and summary
+				phenotypes_summary_click()
 			},
 			error: function(error) {
 				console.log('got error')
@@ -49,6 +50,21 @@ $("#search_button").click(function(){
 	});
 
 })
+
+$(document).on('click', '#phenotypes_summary', phenotypes_summary_click);
+function phenotypes_summary_click() {
+	$('#left-panel a').removeClass('active');
+	$('#left-panel a').css('color', 'black');
+	$('#phenotype_container').hide();
+	$('#phenotypes_summary').addClass('active');
+	$('#phenotypes_summary').css('color', 'white');
+
+	// create histogram
+	create_histogram();
+
+	// create summary
+	create_summary();
+}
 
 // popovers Initialization
 $(function() {
@@ -64,7 +80,6 @@ function phenotype_click() {
 
 	var current = $(this).text();
 	console.log(current);
-	var current_pheno;
 	var data;
 	var keys;
 	for (var i=0; i<phenotypes.length; i++) {
@@ -95,6 +110,29 @@ function jsUcfirst(string)
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+$(document).on('click', '#phenotypes', phenotype_click_new);
+function phenotype_click_new() {
+	$('#phenotype_container').show();
+	var main_container = $('#phenotype_container');
+
+	var details_card = $('#details_card');
+	var icd_card = $('#icd_card');
+	var medications_card = $('#medications_card');
+	var demographics_card = $('#demographics_card');
+	var vital_signs_card = $('#vital_signs_card');
+	var lab_results_card = $('#lab_results_card');
+
+	details = '<p><strong>Phenotype:</strong> ' + current_pheno['title'] + '</p>';
+	for (item in current_pheno['contributors']) {
+		if (item != 'id') {
+			details += '<p><strong>' + item + ':</strong> ' + current_pheno['contributors'][item] + '</p>';
+		}
+	}
+
+	details_card.children('.card-body').append(details);
+	
+	console.log('This: ' + current_pheno);
+}
 
 function create_histogram() {
 	html = ""
