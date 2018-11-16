@@ -12,7 +12,7 @@ function generate_random_results() {
 	var result_rands = [4400, 2500, 3400, 5000, 800]
 	var execution_rands = [421, 123, 33, 76, 756]
 	var comment_rands = [21, 34, 2, 13, 42]
-	for (var i=0; i<phenotypes.length; i++) {
+	for (var i = 0; i < phenotypes.length; i++) {
 		data = phenotypes[i];
 		phenotype_name = data['title'];
 		phenotype_result[phenotype_name] = result_rands[i];
@@ -21,51 +21,60 @@ function generate_random_results() {
 	}
 }
 
-$("#search_button").click(function(){
+function getRandomColor() {
+	var letters = '0123456789ABCDEF';
+	var color = '#';
+	for (var i = 0; i < 6; i++) {
+		color += letters[Math.floor(Math.random() * 16)];
+	}
+	return color;
+}
+
+$("#search_button").click(function () {
 	console.log('loaded hubble')
 	var output = $("#search_query").val();
 	if (output.length == 0) {
-		console.log("empty")	
+		console.log("empty")
 	}
 	console.log(output)
-	var data = {'search': output}
+	var data = { 'search': output }
 
 	$.ajax({
-			url: '/lookup',
-			data: JSON.stringify(data),
-			type: 'POST',
-			success: function(response) {
-				console.log('got response')
-				phenotypes = response;
-				console.log(phenotypes);
-				generate_random_results(); // TODO: fix once we have data
+		url: '/lookup',
+		data: JSON.stringify(data),
+		type: 'POST',
+		success: function (response) {
+			console.log('got response')
+			phenotypes = response;
+			console.log(phenotypes);
+			generate_random_results(); // TODO: fix once we have data
 
-				// create left-panel
-				html = ""
-				html += '<a id="phenotypes_summary" class="list-group-item list-group-item-action waves-effect">';
-					// html += '<i class="fa fa-pie-chart mr-3"></i>' + Summary;
-					html += 'Summary';
-					html += '</a>';
-				for (var i=0; i<phenotypes.length; i++) {
-					var data = phenotypes[i];
-					// console.log(data)
-					html += '<a id="phenotypes" class="list-group-item list-group-item-action waves-effect">';
-					html += '<i class="fa fa-pie-chart mr-3"></i>' + data['title'];
-					html += '</a>';
-				}
+			// create left-panel
+			html = ""
+			html += '<a id="phenotypes_summary" class="list-group-item list-group-item-action waves-effect">';
+			// html += '<i class="fa fa-pie-chart mr-3"></i>' + Summary;
+			html += 'Summary';
+			html += '</a>';
+			for (var i = 0; i < phenotypes.length; i++) {
+				var data = phenotypes[i];
+				// console.log(data)
+				html += '<a id="phenotypes" class="list-group-item list-group-item-action waves-effect">';
+				html += '<i class="fa fa-pie-chart mr-3"></i>' + data['title'];
+				html += '</a>';
+			}
 
-				$('#left-panel').html(html);
-				$('#left-panel').show();
+			$('#left-panel').html(html);
+			$('#left-panel').show();
 
-				// create histogram and summary
-				phenotypes_summary_click();
-			},
-			error: function(error) {
-				console.log('got error')
-				console.log(error);
-			},
-			dataType: "json",
-			contentType: 'application/json;charset=UTF-8',
+			// create histogram and summary
+			phenotypes_summary_click();
+		},
+		error: function (error) {
+			console.log('got error')
+			console.log(error);
+		},
+		dataType: "json",
+		contentType: 'application/json;charset=UTF-8',
 	});
 
 })
@@ -96,7 +105,7 @@ function phenotypes_summary_click() {
 }
 
 // popovers Initialization
-$(function() {
+$(function () {
 	$('[data-toggle="popover"]').popover()
 })
 
@@ -113,7 +122,7 @@ function phenotype_click() {
 	console.log(current);
 	var data;
 	var keys;
-	for (var i=0; i<phenotypes.length; i++) {
+	for (var i = 0; i < phenotypes.length; i++) {
 		data = phenotypes[i];
 		keys = Object.keys(data);
 		if (data['title'] == current) {
@@ -141,7 +150,7 @@ function phenotype_click() {
 function splitAndCap(string) {
 	str = string.split('_');
 	processedStr = '';
-	for (var i=0; i<str.length - 1; i++) {
+	for (var i = 0; i < str.length - 1; i++) {
 		processedStr += str[i].charAt(0).toUpperCase() + str[i].slice(1) + ' ';
 	}
 	processedStr += str[str.length - 1].charAt(0).toUpperCase() + str[str.length - 1].slice(1)
@@ -198,10 +207,23 @@ function phenotype_click_new() {
 	details = '<p><strong>Phenotype:</strong> ' + current_pheno['title'] + '</p>';
 	details += getDictContent(current_pheno['contributors']);
 
-	icd = '<p><strong>ICD-9 Inclusion:</strong> ' + current_pheno['icd9_inclusion'] + '</p>';
-	icd += '<p><strong>ICD-9 Exclusion:</strong> ' + current_pheno['icd9_exclusion'] + '</p>';
-	icd += '<p><strong>ICD-10 Inclusion:</strong> ' + current_pheno['icd10_inclusion'] + '</p>';
-	icd += '<p><strong>ICD-10 Exclusion:</strong> ' + current_pheno['icd10_exclusion'] + '</p>';
+	// icd = '<button type="button" class="btn-sm btn-outline-primary waves-effect">ICD-9 Inclusion</button>' + '<p>' + current_pheno['icd9_inclusion'] + '<p>';
+	// icd += '<button type="button" class="btn-sm btn-outline-primary waves-effect">ICD-9 Exclusion</button>' + '<p>' + current_pheno['icd9_exclusion'] + '<p>';
+	// icd += '<button type="button" class="btn-sm btn-outline-primary waves-effect">ICD-10 Inclusion</button>' + '<p>' + current_pheno['icd10_inclusion'] + '<p>';
+	// icd += '<button type="button" class="btn-sm btn-outline-primary waves-effect">ICD-10 Exclusion</button>' + '<p>' + current_pheno['icd10_exclusion'] + '<p>';
+
+	icd = '<p><strong>ICD-9 Inclusion:</strong> ' + current_pheno['icd9_inclusion'] 
+		+ '<button id="ICDchartBtn" type="button" class="btn-sm btn-outline-primary waves-effect" data-toggle="modal" data-target="#chartModal" data-from="icd9_inclusion"><i class="fa fa-pie-chart"></i></button>' + '</p>';
+	
+	icd += '<p><strong>ICD-9 Exclusion:</strong> ' + current_pheno['icd9_exclusion']
+		+ '<button id="ICDchartBtn" type="button" class="btn-sm btn-outline-primary waves-effect" data-toggle="modal" data-target="#chartModal" data-from="icd9_exclusion"><i class="fa fa-pie-chart"></i></button>' + '</p>';
+	
+	icd += '<p><strong>ICD-10 Inclusion:</strong> ' + current_pheno['icd10_inclusion']
+		+ '<button id="ICDchartBtn" type="button" class="btn-sm btn-outline-primary waves-effect" data-toggle="modal" data-target="#chartModal" data-from="icd10_inclusion"><i class="fa fa-pie-chart"></i></button>' + '</p>';
+	
+	icd += '<p><strong>ICD-10 Exclusion:</strong> ' + current_pheno['icd10_exclusion']
+		+ '<button id="ICDchartBtn" type="button" class="btn-sm btn-outline-primary waves-effect" data-toggle="modal" data-target="#chartModal" data-from="icd9_exclusion"><i class="fa fa-pie-chart"></i></button>' + '</p>';
+
 
 	medications = '<p><strong>Medications:</strong> ' + current_pheno['medications'] + '</p>';
 
@@ -218,7 +240,57 @@ function phenotype_click_new() {
 	vital_signs_card.children('.card-body').append(vital_signs);
 	lab_results_card.children('.card-body').append(lab_results);
 
+	medications_list = splitAndCap(current_pheno['medications']).split(' ');
+	$('#medications_card .card-body').append('<canvas id="donutChartMedications"></canvas>');
+	create_donut_chart(medications_list, 'donutChartMedications');
+
 	$('#phenotype_container').show();
+}
+
+$(document).on('click', '#ICDchartBtn', icd_chart_click);
+function icd_chart_click() {
+	var chart_modal = $('#chartModal');
+	chart_modal.find('.modal-body').empty();
+
+	id = $(this).data('from');
+	icd_list = splitAndCap(current_pheno[id]).split(' ');
+
+	chart_modal.find('.modal-body').append('<canvas id="donutChart' + id +'"></canvas>');
+	create_donut_chart(icd_list, 'donutChart'+id);
+}
+
+function create_donut_chart(keys, id) {
+	results = {};
+	colors = [];
+	hover_colors = [];
+
+	if (keys == '') {
+		return;
+	}
+
+	for (var i = 0; i < keys.length; i++) {
+		patients = Math.floor(Math.random() * 1000) + 100;
+		results[keys[i]] = patients;
+		colors[i] = getRandomColor();
+		hover_colors[i] = getRandomColor();
+	}
+
+	var ctxD = document.getElementById(id).getContext('2d');
+	var myLineChart = new Chart(ctxD, {
+		type: 'doughnut',
+		data: {
+			labels: Object.keys(results),
+			datasets: [{
+				label: '# of Patients',
+				data: Object.values(results),
+				backgroundColor: colors,
+				hoverBackgroundColor: hover_colors
+			}]
+		},
+		options: {
+			responsive: true
+		}
+	});
 }
 
 function create_histogram() {
@@ -230,7 +302,7 @@ function create_histogram() {
 	// Gather phenotype result count
 	// phenotype_result = {}
 	var data, keys, phenotype_name;
-	for (var i=0; i<phenotypes.length; i++) {
+	for (var i = 0; i < phenotypes.length; i++) {
 		data = phenotypes[i];
 		phenotype_name = data['title'];
 		// phenotype_result[phenotype_name] = (i+1)*1000;
@@ -277,26 +349,26 @@ function create_summary() {
 	html = ""
 
 	var data, keys, phenotype_name;
-	for (var i=0; i<phenotypes.length; i++) {
+	for (var i = 0; i < phenotypes.length; i++) {
 		data = phenotypes[i];
 		phenotype_name = data['title'];
-		html+='<div class="progress md-progress"><div class="progress-bar pheno-color-' + (i+1).toString() + ' role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div>'
-		html+='<ul class="list-group">'
-		html+='<li class="list-group-item d-flex justify-content-between align-items-center">'
-		html+='<h6>'+phenotype_name+'</h6>'
-		html+='<h6 class="pheno-subtext">Organization name</h6>'                   
-		html+='</li>'
-		html+='<li class="list-group-item d-flex justify-content-between align-items-center list-tight">'
-		html+='Executions'
-		html+='<span class="badge badge-primary badge-pill pheno-color-' + (i+1).toString() + '">' + execution_result[phenotype_name] + ' </span>'
-		html+='</li>'
-		html+='<li class="list-group-item d-flex justify-content-between align-items-center list-tight">'
-		html+='Comments'
-		html+='<span class="badge badge-primary badge-pill pheno-color-' + (i+1).toString() + '">' + comment_result[phenotype_name] + ' </span>'
-		html+='</li>'
-		html+='</ul>'
+		html += '<div class="progress md-progress"><div class="progress-bar pheno-color-' + (i + 1).toString() + ' role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div>'
+		html += '<ul class="list-group">'
+		html += '<li class="list-group-item d-flex justify-content-between align-items-center">'
+		html += '<h6>' + phenotype_name + '</h6>'
+		html += '<h6 class="pheno-subtext">Organization name</h6>'
+		html += '</li>'
+		html += '<li class="list-group-item d-flex justify-content-between align-items-center list-tight">'
+		html += 'Executions'
+		html += '<span class="badge badge-primary badge-pill pheno-color-' + (i + 1).toString() + '">' + execution_result[phenotype_name] + ' </span>'
+		html += '</li>'
+		html += '<li class="list-group-item d-flex justify-content-between align-items-center list-tight">'
+		html += 'Comments'
+		html += '<span class="badge badge-primary badge-pill pheno-color-' + (i + 1).toString() + '">' + comment_result[phenotype_name] + ' </span>'
+		html += '</li>'
+		html += '</ul>'
 
-		html+='<br \>'
+		html += '<br \>'
 	}
 
 	$('#summary_panel_col2 .card-body').html(html);
