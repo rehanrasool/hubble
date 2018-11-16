@@ -82,6 +82,8 @@ function phenotypes_summary_click() {
 
 	// create summary
 	create_summary();
+
+	$('#summary_panel').show();
 }
 
 // popovers Initialization
@@ -91,6 +93,7 @@ $(function() {
 
 $(document).on('click', '#phenotypes', phenotype_click);
 function phenotype_click() {
+	$('#summary_panel').hide();
 	$('#left-panel a').removeClass('active');
 	$('#left-panel a').css('color', 'black');
 	$(this).addClass('active');
@@ -110,17 +113,17 @@ function phenotype_click() {
 	}
 
 	console.log(current_pheno);
-	var phenotype_name = current_pheno['title'];
+	// var phenotype_name = current_pheno['title'];
 
-	html = ""
-	html += '<p><strong>Phenotype:</strong> ' + phenotype_name + '</p>';
-	for (i in current_pheno){
-		if (i != 'title')
-			html += '<p><strong>'+i+':</strong> ' + current_pheno[i] + '</p>';
-	}
+	// html = ""
+	// html += '<p><strong>Phenotype:</strong> ' + phenotype_name + '</p>';
+	// for (i in current_pheno){
+	// 	if (i != 'title')
+	// 		html += '<p><strong>'+i+':</strong> ' + current_pheno[i] + '</p>';
+	// }
 
-	$('#main_panel .card-body').html(html);
-	// $('#main_panel').show();
+	// $('#summary_panel .card-body').html(html);
+	// $('#summary_panel').show();
 }
 
 function splitAndCap(string) {
@@ -186,10 +189,9 @@ function phenotype_click_new() {
 
 function create_histogram() {
 	html = ""
-	html += "<h4>Top Phenotypes: " + jsUcfirst($("#search_query").val()) + "</h4>"
+	html += "<h4>Top Phenotypes: " + splitAndCap($("#search_query").val()) + "</h4>"
 	html += '<canvas id="comparison_histogram"></canvas>';
-	$('#main_panel_col1 .card-body').html(html);
-	$('#main_panel').show();
+	$('#summary_panel_col1 .card-body').html(html);
 
 	// Gather phenotype result count
 	// phenotype_result = {}
@@ -263,7 +265,7 @@ function create_summary() {
 		html+='<br \>'
 	}
 
-	$('#main_panel_col2 .card-body').html(html);
+	$('#summary_panel_col2 .card-body').html(html);
 }
 
 
