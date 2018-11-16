@@ -32,7 +32,20 @@ function getRandomColor() {
 
 $(document).keypress(function(e) {
     if(e.which == 13) {
+    	$.ajax({
+		url: '/dashboard',
+		type: 'POST',
+		success: function (response) {
+			console.log('got response')
+		},
+		error: function (error) {
+			console.log('got error')
+			console.log(error);
+		}
+	});
         var search = $("#main_search").val();
+        window.location.replace("dashboard.html");
+
         $("#search_query").attr('value', search);
         $("#search_button").trigger("click");
 

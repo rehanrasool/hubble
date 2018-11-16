@@ -133,6 +133,16 @@ def find_phenotype(phenotype):
 
 @app.route("/")
 def main():
+	return render_template('index.html')
+	# return render_template('dashboard.html')
+
+@app.route("/dashboard", methods=["POST"])
+def dashboard():
+	print('asdasasdsads')
+	return redirect(url_for('foo'))
+	# return render_template('dashboard.html')
+@app.route('/foo')
+def foo():
 	return render_template('dashboard.html')
 
 @app.route('/lookup', methods=["POST"])
