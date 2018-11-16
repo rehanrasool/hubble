@@ -23,6 +23,10 @@ $("#search_button").click(function(){
 
 				// create left-panel
 				html = ""
+				html += '<a id="phenotypes_summary" class="list-group-item list-group-item-action waves-effect">';
+					// html += '<i class="fa fa-pie-chart mr-3"></i>' + Summary;
+					html += 'Summary';
+					html += '</a>';
 				for (var i=0; i<phenotypes.length; i++) {
 					var data = phenotypes[i];
 					// console.log(data)
@@ -34,9 +38,8 @@ $("#search_button").click(function(){
 				$('#left-panel').html(html);
 				$('#left-panel').show();
 
-				// create histogram
-				create_histogram();
-
+				// create histogram and summary
+				phenotypes_summary_click();
 			},
 			error: function(error) {
 				console.log('got error')
@@ -47,6 +50,21 @@ $("#search_button").click(function(){
 	});
 
 })
+
+$(document).on('click', '#phenotypes_summary', phenotypes_summary_click);
+function phenotypes_summary_click() {
+	$('#left-panel a').removeClass('active');
+	$('#left-panel a').css('color', 'black');
+	$('#phenotype_container').hide();
+	$('#phenotypes_summary').addClass('active');
+	$('#phenotypes_summary').css('color', 'white');
+
+	// create histogram
+	create_histogram();
+
+	// create summary
+	create_summary();
+}
 
 // popovers Initialization
 $(function() {
@@ -86,7 +104,6 @@ function phenotype_click() {
 	$('#main_panel .card-body').html(html);
 	// $('#main_panel').show();
 }
-
 
 function splitAndCap(string) {
 	str = string.split('_');
@@ -150,8 +167,10 @@ function phenotype_click_new() {
 }
 
 function create_histogram() {
-	html = '<canvas id="comparison_histogram"></canvas>';
-	$('#main_panel .card-body').html(html);
+	html = ""
+	html += "<h4>Top Phenotypes: " + jsUcfirst($("#search_query").val()) + "</h4>"
+	html += '<canvas id="comparison_histogram"></canvas>';
+	$('#main_panel_col1 .card-body').html(html);
 	$('#main_panel').show();
 
 	// Gather phenotype result count
@@ -170,34 +189,27 @@ function create_histogram() {
 	// Construct histogram
 	var ctx = document.getElementById("comparison_histogram").getContext('2d');
 	var comparison_histogram = new Chart(ctx, {
-		type: 'bar',
+		type: 'horizontalBar',
+		title: 'asdasd',
 		data: {
 			labels: Object.keys(phenotype_result),
 			datasets: [{
 				label: '# of Patients',
 				data: Object.values(phenotype_result),
 				backgroundColor: [
-					'rgba(255, 99, 132, 0.2)',
-					'rgba(54, 162, 235, 0.2)',
-					'rgba(255, 206, 86, 0.2)',
-					'rgba(75, 192, 192, 0.2)',
-					'rgba(153, 102, 255, 0.2)',
-					'rgba(255, 159, 64, 0.2)'
-				],
-				borderColor: [
-					'rgba(255,99,132,1)',
+					'rgba(255, 99, 132, 1)',
 					'rgba(54, 162, 235, 1)',
 					'rgba(255, 206, 86, 1)',
 					'rgba(75, 192, 192, 1)',
 					'rgba(153, 102, 255, 1)',
 					'rgba(255, 159, 64, 1)'
 				],
-				borderWidth: 1
+				borderWidth: 0
 			}]
 		},
 		options: {
 			scales: {
-				yAxes: [{
+				xAxes: [{
 					ticks: {
 						beginAtZero: true
 					}
@@ -205,6 +217,37 @@ function create_histogram() {
 			}
 		}
 	});
+}
+
+function create_summary() {
+	html = ""
+
+	phenotype_result = {}
+	var data, keys, phenotype_name;
+	for (var i=0; i<phenotypes.length; i++) {
+		data = phenotypes[i];
+		phenotype_name = data['title'];
+		phenotype_result[phenotype_name] = (i+1)*1000;
+		html+='<div class="progress md-progress"><div class="progress-bar pheno-color-' + (i+1).toString() + ' role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div>'
+		html+='<ul class="list-group">'
+		html+='<li class="list-group-item d-flex justify-content-between align-items-center">'
+		html+='<h6>'+phenotype_name+'</h6>'
+		html+='<h6 class="pheno-subtext">Organization name</h6>'                   
+		html+='</li>'
+		html+='<li class="list-group-item d-flex justify-content-between align-items-center list-tight">'
+		html+='Executions'
+		html+='<span class="badge badge-primary badge-pill pheno-color-' + (i+1).toString() + '">' + 100 + ' </span>'
+		html+='</li>'
+		html+='<li class="list-group-item d-flex justify-content-between align-items-center list-tight">'
+		html+='Comments'
+		html+='<span class="badge badge-primary badge-pill pheno-color-' + (i+1).toString() + '">' + 200 + ' </span>'
+		html+='</li>'
+		html+='</ul>'
+
+		html+='<br \>'
+	}
+
+	$('#main_panel_col2 .card-body').html(html);
 }
 
 
