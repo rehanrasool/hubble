@@ -207,23 +207,17 @@ function phenotype_click_new() {
 	details = '<p><strong>Phenotype:</strong> ' + current_pheno['title'] + '</p>';
 	details += getDictContent(current_pheno['contributors']);
 
-	// icd = '<button type="button" class="btn-sm btn-outline-primary waves-effect">ICD-9 Inclusion</button>' + '<p>' + current_pheno['icd9_inclusion'] + '<p>';
-	// icd += '<button type="button" class="btn-sm btn-outline-primary waves-effect">ICD-9 Exclusion</button>' + '<p>' + current_pheno['icd9_exclusion'] + '<p>';
-	// icd += '<button type="button" class="btn-sm btn-outline-primary waves-effect">ICD-10 Inclusion</button>' + '<p>' + current_pheno['icd10_inclusion'] + '<p>';
-	// icd += '<button type="button" class="btn-sm btn-outline-primary waves-effect">ICD-10 Exclusion</button>' + '<p>' + current_pheno['icd10_exclusion'] + '<p>';
-
-	icd = '<p><strong>ICD-9 Inclusion:</strong> ' + current_pheno['icd9_inclusion'] 
-		+ '<button id="ICDchartBtn" type="button" class="btn-sm btn-outline-primary waves-effect" data-toggle="modal" data-target="#chartModal" data-from="icd9_inclusion"><i class="fa fa-pie-chart"></i></button>' + '</p>';
+	icd = '<p><button id="chartBtn" type="button" class="btn-sm btn-outline-primary waves-effect" data-toggle="modal" data-target="#chartModal" data-from="icd9_inclusion"><i class="fa fa-pie-chart"></i></button>'
+	 + '&nbsp<strong>ICD-9 Inclusion:</strong> ' + current_pheno['icd9_inclusion'] + '</p>';
 	
-	icd += '<p><strong>ICD-9 Exclusion:</strong> ' + current_pheno['icd9_exclusion']
-		+ '<button id="ICDchartBtn" type="button" class="btn-sm btn-outline-primary waves-effect" data-toggle="modal" data-target="#chartModal" data-from="icd9_exclusion"><i class="fa fa-pie-chart"></i></button>' + '</p>';
+	icd += '<p><button id="chartBtn" type="button" class="btn-sm btn-outline-primary waves-effect" data-toggle="modal" data-target="#chartModal" data-from="icd9_exclusion"><i class="fa fa-pie-chart"></i></button>' 
+	+ '&nbsp<strong>ICD-9 Exclusion:</strong> ' + current_pheno['icd9_exclusion'] + '</p>';
 	
-	icd += '<p><strong>ICD-10 Inclusion:</strong> ' + current_pheno['icd10_inclusion']
-		+ '<button id="ICDchartBtn" type="button" class="btn-sm btn-outline-primary waves-effect" data-toggle="modal" data-target="#chartModal" data-from="icd10_inclusion"><i class="fa fa-pie-chart"></i></button>' + '</p>';
+	icd += '<p><button id="chartBtn" type="button" class="btn-sm btn-outline-primary waves-effect" data-toggle="modal" data-target="#chartModal" data-from="icd10_inclusion"><i class="fa fa-pie-chart"></i></button>' 
+	+ '&nbsp<strong>ICD-10 Inclusion:</strong> ' + current_pheno['icd10_inclusion'] + '</p>';
 	
-	icd += '<p><strong>ICD-10 Exclusion:</strong> ' + current_pheno['icd10_exclusion']
-		+ '<button id="ICDchartBtn" type="button" class="btn-sm btn-outline-primary waves-effect" data-toggle="modal" data-target="#chartModal" data-from="icd9_exclusion"><i class="fa fa-pie-chart"></i></button>' + '</p>';
-
+	icd += '<p><button id="chartBtn" type="button" class="btn-sm btn-outline-primary waves-effect" data-toggle="modal" data-target="#chartModal" data-from="icd9_exclusion"><i class="fa fa-pie-chart"></i></button>'
+	+ '&nbsp<strong>ICD-10 Exclusion:</strong> ' + current_pheno['icd10_exclusion'] + '</p>';
 
 	medications = '<p><strong>Medications:</strong> ' + current_pheno['medications'] + '</p>';
 
@@ -240,21 +234,24 @@ function phenotype_click_new() {
 	vital_signs_card.children('.card-body').append(vital_signs);
 	lab_results_card.children('.card-body').append(lab_results);
 
-	medications_list = splitAndCap(current_pheno['medications']).split(' ');
-	$('#medications_card .card-body').append('<canvas id="donutChartMedications"></canvas>');
-	create_donut_chart(medications_list, 'donutChartMedications');
+	$('#medications_card .card-body').append('<div class="card-footer text-center"> \ <button id="chartBtn" type="button" class="btn btn-outline-primary waves-effect" \
+		 data-toggle="modal" data-target="#chartModal" data-from="medications"> \
+		<i class="fa fa-pie-chart"></i> \
+		</button></div>');
 
 	$('#phenotype_container').show();
 }
 
-$(document).on('click', '#ICDchartBtn', icd_chart_click);
-function icd_chart_click() {
+$(document).on('click', '#chartBtn', chart_click);
+function chart_click() {
 	var chart_modal = $('#chartModal');
+	chart_modal.find('.modal-title').empty();
 	chart_modal.find('.modal-body').empty();
 
 	id = $(this).data('from');
 	icd_list = splitAndCap(current_pheno[id]).split(' ');
 
+	chart_modal.find('#chartModalLabel').append(splitAndCap(id));
 	chart_modal.find('.modal-body').append('<canvas id="donutChart' + id +'"></canvas>');
 	create_donut_chart(icd_list, 'donutChart'+id);
 }
