@@ -120,6 +120,11 @@ $("#fork_phenotype").click(function () {
 
 $("#search_button").click(function () {
 	console.log('loaded hubble')
+
+	phenotype_result = {}
+	execution_result = {}
+	comment_result = {}
+
 	var output = $("#search_query").val();
 	if (output.length == 0) {
 		console.log("empty")
@@ -176,6 +181,7 @@ $.fn.removeClassStartingWith = function (filter) {
 
 $(document).on('click', '#phenotypes_summary', phenotypes_summary_click);
 function phenotypes_summary_click() {
+	$('#summary_panel').hide();
 	$('#left-panel a').removeClass('active');
 	$('#left-panel a').removeClassStartingWith('pheno-color');
 	$('#left-panel a').css('color', 'black');
@@ -190,7 +196,9 @@ function phenotypes_summary_click() {
 	create_summary();
 
 	// $('#main_panel').hide();
-	$('#summary_panel').show();
+	if (phenotypes.length > 0) {
+		$('#summary_panel').show();
+	}
 }
 
 // popovers Initialization

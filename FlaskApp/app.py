@@ -4,13 +4,13 @@ from sqlalchemy import create_engine
 from sqlalchemy import Table, Column, String, MetaData, Integer, select
 # from flaskext.mysql import MySQL
 
-# DATABASE_URL = "postgres://kbsvpvqhjkrrlo:4d168ed12be5e40e5578ed832857932faa8ba341b9a94fd19fa5426e5da1578d@ec2-23-23-153-145.compute-1.amazonaws.com:5432/d6b9rdf9dvnreh"
+DATABASE_URL = "postgres://kbsvpvqhjkrrlo:4d168ed12be5e40e5578ed832857932faa8ba341b9a94fd19fa5426e5da1578d@ec2-23-23-153-145.compute-1.amazonaws.com:5432/d6b9rdf9dvnreh"
 
 import os
 import psycopg2
 import json
 
-DATABASE_URL = os.environ['DATABASE_URL']
+# DATABASE_URL = os.environ['DATABASE_URL']
 app = Flask(__name__)
 db = create_engine(DATABASE_URL)
 meta = MetaData(db)
@@ -93,7 +93,7 @@ contributors_table = Table('contributors', meta,
 
 def find_phenotype(phenotype):
 	print("looking for: %s" % phenotype)
-	phenotype_statement = phenotypes_table.select()
+	phenotype_statement = phenotypes_table.select().where(phenotypes_table.c.title.ilike('%' + phenotype + '%'))
 	result = []
 	# for r in conn.execute(phenotype_statement):
 	# 	result.append(r)
