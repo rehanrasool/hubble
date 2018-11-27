@@ -32,7 +32,13 @@ function getRandomColor() {
 
 $(document).keypress(function(e) {
     if(e.which == 13) {
-		$("#search")[0].click()
+    	if( $('#search').length ) {
+    		$("#search")[0].click();	
+    	}
+
+    	if( $('#search_button').length ) {
+    		$("#search_button").trigger("click");
+    	}
     	// $.ajax({
 		// url: '/dashboard',
 		// type: 'POST',
@@ -48,7 +54,7 @@ $(document).keypress(function(e) {
         // window.location.replace("dashboard.html");
 
         // $("#search_query").attr('value', search);
-        // $("#search_button").trigger("click");
+        // 
 
     }
 });
