@@ -63,7 +63,16 @@ $("#informatics_submit_button").click(function () {
 	$('#submitted_message').show();
 })
 
+$("#add_phenotype").click(function () {
+	refreshPhenotypeModal();
+	var phenotype_modal = $('#addPhenotypeModal');
+	$('#myModalLabel').empty();
+	$('#myModalLabel').append("New Phenotype");
+	$('#phenotype-form-test label').removeClass('active');
+});
+
 $("#fork_phenotype").click(function () {
+	refreshPhenotypeModal();
 	var phenotype_modal = $('#addPhenotypeModal');
 	$('#myModalLabel').empty();
 	$('#myModalLabel').append("Fork Phenotype");
@@ -123,6 +132,11 @@ $("#fork_phenotype").click(function () {
 		}
 	}
 })
+
+function refreshPhenotypeModal() {
+	console.log('reset form')
+	$('#phenotype-form-test')[0].reset();
+}
 
 $("#search_button").click(function () {
 	console.log('loaded hubble')
