@@ -1,0 +1,9 @@
+﻿Phenotype,Diagnosing Asthma in Young Children,,,,,,,
+ICD-9 Inclusionary ,439.xx,,,,,,,
+ICD-9 exclusionary ,277.00-277.02,279.xx,331,317 318 319,428-429.9,496,70,511.1
+age,<5,,,,,,,
+allergy signs,"The child has signs of allergies, including the allergic skin condition eczema",,,,,,,
+allergy reactions,The child has allergic reactions to pollens or other airborne allergens,,,,,,,
+wheezes,The child wheezes even when he or she doesn't have a cold or other infection,,,,,,,
+Reference link,https://www.nhlbi.nih.gov/health-topics/asthma,,,,,,,
+Result,500,,,,,,,
